@@ -28,6 +28,7 @@ const CutList = React.createClass({
 
     return(
       <div className="cut-list">
+        
       </div>
     );
   }

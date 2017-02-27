@@ -21,3 +21,7 @@ html, body {
   height: 500px;
   border: 5px solid ghostwhite;
 }
+
+.stock {
+  border: 1px solid black;
+}
