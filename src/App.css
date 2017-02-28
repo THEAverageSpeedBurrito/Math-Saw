@@ -10,25 +10,23 @@ html, body {
 }
 
 .container {
-  width: 500px;
+  /*width: 100%;*/
+  max-width: 960px;
   height: auto;
-  /*border: 1px solid gray;*/
+  /*border: 3px solid ghostwhite;*/
   margin: 20px auto;
+  padding: 0 10px 0 10px;
 }
 
-.editor   {
-  width: 500px;
-  height: 500px;
-  border: 5px solid ghostwhite;
+.center {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
-
-.stock {
-  border: 1px solid black;
-  display: inline-block;
-  margin: 10px;
-}
-
-.component {
-  border: 1px solid dodgerblue;
-  display: inline-block;
+.right {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: right;
 }

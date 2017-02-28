@@ -1,5 +1,8 @@
 import React from 'react';
-import CreateCanvas from './js/createcanvas'
+import createCanvas from './js/createcanvas'
+
+//components
+import NavBar from './navbar';
 
 const Export = React.createClass({
   getInitialState: function () {
@@ -10,17 +13,24 @@ const Export = React.createClass({
   },
 
   componentDidMount: function () {
+    var stock = this.state.stock;
+    var components = this.state.components;
     //Initialize lodaing animation
 
     //perform algorithmic operation
-    CreateCanvas(this,state.stock, this.state.components);
+    var canvas = createCanvas(stock, components);
   },
 
   render: function () {
     return (
-      <p>Goodbye World</p>
+      <main>
+        <NavBar/>
+          <div className="container">
+            Export page/view
+          </div>
+      </main>
     )
-  }
+  },
 });
 
 export default Export;

@@ -1,6 +1,11 @@
 import React from 'react';
-import {Router, Route, browserHistory} from 'react-router';
 var {Component, Stock} = require('./js/constructors');
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import { Container, Row, Col, Visible, Hidden, ScreenClassRender } from 'react-grid-system';
+
 
 //Components
 import NavBar from './navbar';
@@ -14,7 +19,7 @@ var Editor = React.createClass({
       components: [],
       length: '',
       width: '',
-      render: true
+      export: false
     })
   },
 
@@ -22,13 +27,29 @@ var Editor = React.createClass({
 
     var which;
 
-    if(this.state.render) {
+    if(this.state.export) {
       which = <Export
         components={this.state.components}
         stock={this.state.stock}
       />
     }else{
-      which = <p>I contain all the relevant data</p>
+      which=
+      <main>
+        <NavBar/>
+        <Container>
+  <Row>
+    <Col sm={4}>
+      One of three columns
+    </Col>
+    <Col sm={4}>
+      One of three columns
+    </Col>
+    <Col sm={4}>
+      One of three columns
+    </Col>
+  </Row>
+</Container>
+      </main>
     }
 
     return which
@@ -62,6 +83,13 @@ var Editor = React.createClass({
   renderFit: function () {
     var stock = this.state.stock;
     var components = this.state.components;
+  },
+
+  changeState: function () {
+    this.setState({
+      render: !this.state.render
+    });
+    console.log(this.state.render);
   }
 })
 
