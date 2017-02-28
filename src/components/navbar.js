@@ -3,20 +3,28 @@ import AppBar from 'material-ui/AppBar';
 
 const NavBar = React.createClass({
   getIntitalState: function () {
-    return null;
+    return {
+      logged: false,
+    };
   },
 
   render: function () {
     var navStyle = {
-      backgroundColor: "#114B5F",
-      boxShadow: "0 0 20px 10px rgba(0, 0, 0, 0.2)",
-      borderTop: '3px solid #FFF056'
+      backgroundColor: "#FFFFFF",
+      color: "#114B5F",
     }
+    var titleStyle = {
+      color: '#6290C8'
+    }
+
+    var navbar;
 
     return (
       <AppBar
         title="Math Saw"
         style={navStyle}
+        titleStyle={titleStyle}
+        showMenuIconButton={false}
       />
     )
   }

@@ -1,8 +1,7 @@
 import React from 'react';
-import createCanvas from './js/createcanvas'
-
+import RaisedButton from 'material-ui/RaisedButton';
+import createCanvas from './js/createCanvas'
 //components
-import NavBar from './navbar';
 
 const Export = React.createClass({
   getInitialState: function () {
@@ -18,15 +17,17 @@ const Export = React.createClass({
     //Initialize lodaing animation
 
     //perform algorithmic operation
-    var canvas = createCanvas(stock, components);
+    createCanvas(stock, components);
   },
 
+  //basic wrapper html
   render: function () {
     return (
       <main>
-        <NavBar/>
           <div className="container">
-            Export page/view
+            <canvas id="cutRender" width="300" height="150">
+              Your browser does not support the HTML5 canvas tag.
+            </canvas>
           </div>
       </main>
     )

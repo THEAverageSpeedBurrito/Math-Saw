@@ -1,10 +1,11 @@
 import React from 'react';
 var {Component, Stock} = require('./js/constructors');
+import { Container, Row, Col} from 'react-grid-system';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-import { Container, Row, Col, Visible, Hidden, ScreenClassRender } from 'react-grid-system';
+import TextField from 'material-ui/TextField';
+
 
 
 //Components
@@ -27,32 +28,79 @@ var Editor = React.createClass({
 
     var which;
 
-    if(this.state.export) {
-      which = <Export
-        components={this.state.components}
-        stock={this.state.stock}
-      />
-    }else{
-      which=
-      <main>
-        <NavBar/>
-        <Container>
-  <Row>
-    <Col sm={4}>
-      One of three columns
-    </Col>
-    <Col sm={4}>
-      One of three columns
-    </Col>
-    <Col sm={4}>
-      One of three columns
-    </Col>
-  </Row>
-</Container>
-      </main>
+    const style = {
+      paper: {
+        display: 'inline-block',
+        float: 'left',
+        margin: '0 32px 16px 0',
+        padding: '10px',
+        width: '100%'
+      },
+    };
+
+    var render;
+    if(this.state.export){
+    render =  <Export
+          components={this.state.components}
+          stock={this.state.stock}
+        />
     }
 
-    return which
+    return(
+      <main>
+        <NavBar/>
+        <Container className="container">
+          <Row>
+            <Col xs={12} sm={6}>
+              <Paper style={style.paper}>
+                <TextField
+                  hintText="Length"
+                  onChange={this.setLength}
+                  value={this.state.length}
+                />
+                <TextField
+                  hintText="Width"
+                  onChange={this.setWidth}
+                  value={this.state.width}
+                />
+                <br/>
+                <RaisedButton
+                  label="Add Component"
+                  onClick={this.addComponent}
+                />
+              </Paper>
+            </Col>
+            <Col xs={12} sm={6}>
+              <Paper style={style.paper}>
+                <table>
+                  <thead>
+                    <th>
+                      <td>Length</td>
+                      <td>Width</td>
+                    </th>
+                  </thead>
+                    {
+                      this.state.components.map((comp) => {
+                        return (
+                          <tr>
+                            <td>{comp.length}</td>
+                            <td>{comp.width}</td>
+                          </tr>
+                        )
+                      })
+                    }
+                </table>
+                <RaisedButton
+                  label="Render Cuts"
+                  onClick={this.renderCuts}
+                />
+              </Paper>
+            </Col>
+          </Row>
+        </Container>
+        {render}
+      </main>
+    )
   },
 
   setLength: function (event) {
@@ -76,13 +124,21 @@ var Editor = React.createClass({
       length: '',
       width: '',
     })
+
+    console.log(this.state.components);
   },
 
   //take array of object classes
   //returns array of canvas objects to br rendered
-  renderFit: function () {
+  renderCuts: function () {
     var stock = this.state.stock;
     var components = this.state.components;
+
+    console.log(stock, components);
+
+    this.setState({
+      export: true
+    })
   },
 
   changeState: function () {

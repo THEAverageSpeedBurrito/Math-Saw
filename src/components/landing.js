@@ -1,5 +1,7 @@
 import React from 'react';
+import { Container, Row, Col} from 'react-grid-system';
 import NavBar from '../components/navbar';
+
 
 const Landing = React.createClass({
   getInitialState: function () {
@@ -10,8 +12,10 @@ const Landing = React.createClass({
     return (
       <div>
         <NavBar/>
-        <div className='container'>
-          Welcome to this woodcutting app. This is going to be fun yay!
+        <div className="header">
+          <Container className="container">
+            
+          </Container>
         </div>
       </div>
     )
