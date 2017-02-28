@@ -25,7 +25,7 @@ const Export = React.createClass({
     return (
       <main>
           <div className="container">
-            <canvas id="cutRender" width="300" height="150">
+            <canvas id="cutRender" width="800" height="500">
               Your browser does not support the HTML5 canvas tag.
             </canvas>
           </div>

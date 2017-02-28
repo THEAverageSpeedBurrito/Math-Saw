@@ -5,13 +5,14 @@ function Component (length, width) {
   this.area = length * width;
 }
 
-function Stock (length, width) {
+function Stock (length, width, x, y) {
+  this.x = x || 0;
+  this.y = y || 0;
   this.length = length;
   this.width = width;
   this.area = length * width;
   this.areaLeft = this.area;
   this.allUsed = false;
-  this.cuts = [];
   this.pieces = [];
 }
 

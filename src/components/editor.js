@@ -17,7 +17,7 @@ var Editor = React.createClass({
   getInitialState: function () {
     return ({
       stock: [new Stock(48, 4)],
-      components: [],
+      components: [new Component(20, 3)],
       length: '',
       width: '',
       export: false
@@ -82,7 +82,7 @@ var Editor = React.createClass({
                     {
                       this.state.components.map((comp) => {
                         return (
-                          <tr>
+                          <tr key={comp.id}>
                             <td>{comp.length}</td>
                             <td>{comp.width}</td>
                           </tr>
@@ -119,13 +119,13 @@ var Editor = React.createClass({
     var {length, width} = this.state;
 
     this.state.components.push(new Component(parseInt(length), parseInt(width)))
+    this.state.components[this.state.components.length - 1].id = this.state.components.length - 1
 
     this.setState({
       length: '',
       width: '',
     })
 
-    console.log(this.state.components);
   },
 
   //take array of object classes
@@ -133,8 +133,6 @@ var Editor = React.createClass({
   renderCuts: function () {
     var stock = this.state.stock;
     var components = this.state.components;
-
-    console.log(stock, components);
 
     this.setState({
       export: true
@@ -145,7 +143,6 @@ var Editor = React.createClass({
     this.setState({
       render: !this.state.render
     });
-    console.log(this.state.render);
   }
 })
 
