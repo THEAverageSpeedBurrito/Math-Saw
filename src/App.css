@@ -24,4 +24,11 @@ html, body {
 
 .stock {
   border: 1px solid black;
+  display: inline-block;
+  margin: 10px;
+}
+
+.component {
+  border: 1px solid dodgerblue;
+  display: inline-block;
 }

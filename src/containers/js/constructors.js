@@ -1,5 +1,5 @@
 //constructors
-function Cut (length, width) {
+function Component (length, width) {
   this.length = length;
   this.width = width;
   this.area = length * width;
@@ -28,6 +28,6 @@ Stock.prototype.willFit = function (component) {
 };
 
 module.exports = {
-  Cut,
+  Component,
   Stock
 };

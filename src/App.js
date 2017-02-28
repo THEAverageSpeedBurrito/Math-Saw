@@ -3,9 +3,8 @@ import {Router, Route, browserHistory} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
-import Landing from './containers/landing';
-import Editor from './containers/editor';
-import NavBar from './components/navbar';
+import Landing from './components/landing';
+import Editor from './components/editor';
 
 class App extends Component {
   render() {
