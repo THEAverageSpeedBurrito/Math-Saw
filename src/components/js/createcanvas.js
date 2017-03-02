@@ -16,56 +16,65 @@ function createCanvas (stock, components) {
 
   //evaluate components
   components.forEach((comp) => {
-    if(usedStock[0].willFit(comp)){
-      console.log('fits');
+    var stock = usedStock[0];
+
+    if(stock.willFit(comp)){
+      //Render component
+      if(stock.hasPieces()){
+        var pieces = getPossible(stock, comp);
+        var piece = getBestFit(pieces, comp);
+        console.log(pieces, piece);
+        setOrigin(piece, comp);
+        canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale)
+        piece.setLeftovers(comp);
+      }else{
+        canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale);
+        stock.setLeftovers(comp);
+      }
+    }else{
+      //generate & render new stock
     }
   });
 
   canvas.stroke();
 }
 
-function placeComponent(stock, comp){
-  usedStock.forEach((stock) => {
-
-  })
-}
-
-function placeAdditional(stock, comp){
-  if(stock.willFit(comp)){
-
-      var opt1 = stock.pieces[0]
-      var opt2 = stock.pieces[1];
-
-    if(opt1.willFit(comp) && opt1.willFit(comp)){
-      if(opt1.area - comp.area > opt2.area - comp.area) {
-        handlePlacement(opt2, comp);
-      }else{
-        handlePlacement(opt1, comp);
-      }
-    }else if(opt1.willFit(comp)){
-      handlePlacement(opt1, comp);
-    }else{
-      handlePlacement(opt2, comp);
-    }
-  }
-  canvas.rect(origin.x, origin.y, comp.width*scale, comp.length*scale);
-}
-
-function handlePlacement(stock, comp){
+function setOrigin (stock, comp){
   origin.x = stock.x * scale;
   origin.y = stock.y * scale;
+}
 
-  if(stock.width === comp.width && stock.length === comp.length){
-    stock.allUsed = true;
-    console.log('all used');
+function getPossible (stock, comp) {
+  var all = [stock];
+
+  for(let i = 0; i < all.length; i++) {
+    if(all[i].hasPieces()){
+      all.push(all[i].pieces[0], all[i].pieces[1]);
+    }
+  }
+
+  return all.filter((obj) => {
+    return !obj.hasPieces() && obj.willFit(comp);
+  });
+}
+
+function getBestFit(pieces, comp){
+  if(pieces.length === 1){
+    return pieces[0];
+  }else{
+    var best = {
+      index: 0,
+      val: Infinity
+    };
+    pieces.forEach((piece) => {
+      if(piece.area - comp.area < best.val) {
+        best.val = piece.area - comp.area;
+        best.index = pieces.indexOf(piece);
+      }
+    })
+    return pieces[best.index];
   }
 }
 
-function determinePieces (stock, comp) {
-  stock.pieces.push(
-    new Stock(stock.length, stock.width - comp.width, comp.width, 0),
-    new Stock(stock.length - comp.length, stock.width, 0, comp.length)
-  )
-}
 
 module.exports = createCanvas;

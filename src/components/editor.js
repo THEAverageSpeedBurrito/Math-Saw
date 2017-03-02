@@ -17,7 +17,7 @@ var Editor = React.createClass({
   getInitialState: function () {
     return ({
       stock: [new Stock(48, 4)],
-      components: [new Component(4, 48), new Component(21,1)],
+      components: [new Component(3, 20), new Component(1, 4), new Component(1, 5)],
       length: '',
       width: '',
       export: false

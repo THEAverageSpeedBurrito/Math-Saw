@@ -15,34 +15,65 @@ function Stock (length, width, x, y) {
   this.area = length * width;
   this.areaLeft = this.area;
   this.pieces = [];
+  this.allUsed = false;
 }
 
 //prototypes
 
-//evaluate deeper layers of pieces
 Stock.prototype.willFit = function (component) {
   var stock = this;
 
-  if(stock.pieces.length !== 0){
-    stock.forEach((piece) => {
-      stock.willFit(piece);
-    })
-  }else{
-    if(fitsV(stock, component) && fitsH(stock, component)){
-      return true;
-    }else if(fitsV(stock, component)){
+  if(stock.allUsed == false){
+    if(fitsV(stock, component)){
       return true;
     }else if(fitsH(stock, component)){
+      //flips component if measurements are reversed
+      var tempLength = component.length;
+      component.length = component.width;
+      component.width = tempLength;
+
       return true;
     }
   }
   return false;
 };
 
+Stock.prototype.setLeftovers = function (component) {
+  var stock = this;
+  var difLength, difWidth;
+
+  if(stock.fitsExactly(component)){
+    stock.allUsed = true;
+    Stock.pieces = stock;
+  }else{
+    var difLength = (stock.length - component.length);
+    var difWidth = (stock.width - component.width);
+
+    if(difLength === 0) {
+      stock.x += component.width;
+      console.log('I take up the whole width');
+    }else if(difWidth === 0) {
+      stock.y += component.length;
+      console.log('I take up the whole length');
+    }else{
+
+      stock.pieces.push(
+        new Stock(stock.length, difWidth, component.width, 0 + stock.y),
+        new Stock(difLength, stock.width, 0 + stock.x, component.length)
+      );
+    }
+  }
+}
+
 Stock.prototype.fitsExactly = function (component) {
   return (this.length === component.length && this.width === component.width);
 }
 
+Stock.prototype.hasPieces = function () {
+  return (this.pieces.length !== 0);
+}
+
+//Helper Functions
 function fitsV (stock, comp) {
   return (stock.length >= comp.length && stock.width >= comp.width);
 }
