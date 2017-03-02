@@ -17,7 +17,7 @@ var Editor = React.createClass({
   getInitialState: function () {
     return ({
       stock: [new Stock(48, 4)],
-      components: [new Component(20, 3)],
+      components: [new Component(4, 48), new Component(21,1)],
       length: '',
       width: '',
       export: false
@@ -74,10 +74,10 @@ var Editor = React.createClass({
               <Paper style={style.paper}>
                 <table>
                   <thead>
-                    <th>
+                    <tr>
                       <td>Length</td>
                       <td>Width</td>
-                    </th>
+                    </tr>
                   </thead>
                     {
                       this.state.components.map((comp) => {
