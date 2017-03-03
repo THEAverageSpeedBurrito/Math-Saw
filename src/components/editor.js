@@ -13,11 +13,28 @@ import NavBar from './navbar';
 import Export from './export';
 
 
+
 var Editor = React.createClass({
   getInitialState: function () {
     return ({
       stock: [new Stock(48, 4)],
-      components: [new Component(3, 20)],
+      components: [
+        new Component(3, 20),
+        new Component(1, 20),
+        new Component(4, 8),
+        new Component(2, 2),
+        new Component(8, 3),
+        new Component(2, 2),
+        new Component(1, 8),
+        new Component(4, 10),
+        new Component(1, 10),
+        new Component(3, 11),
+        new Component(1, 3),
+        new Component(10, 3),
+        new Component(1, 8),
+        new Component(4, 25),
+        new Component(4, 10),
+      ],
       length: '',
       width: '',
       export: false
