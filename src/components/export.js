@@ -1,6 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import createCanvas from './js/createCanvas'
+import createCanvas from './js/createcanvas'
 //components
 
 const Export = React.createClass({

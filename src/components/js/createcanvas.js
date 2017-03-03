@@ -2,6 +2,7 @@ var {Stock, Component} = require('./constructors')
 var origin = {x: 0, y: 0};
 var scale = 10;
 var usedStock = [];
+var usableStock = [];
 var canvas;
 
 function createCanvas (stock, components) {
@@ -14,32 +15,58 @@ function createCanvas (stock, components) {
   }
   canvas.rect(origin.x, origin.y, usedStock[0].width * scale, usedStock[0].length * scale)
 
-  //evaluate components
-  components.forEach((comp) => {
-    var stock = usedStock[0];
+  usableStock.push(usedStock[0]);
 
-    if(stock.willFit(comp)){
-      //Render component
-      if(stock.hasPieces()){
-        var pieces = getPossible(stock, comp);
-        var piece = getBestFit(pieces, comp);
-        console.log(pieces, piece);
-        setOrigin(piece, comp);
-        canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale)
-        piece.setLeftovers(comp);
-      }else{
-        canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale);
-        stock.setLeftovers(comp);
+  components.forEach((comp) => {
+
+    var compatible = usableStock.filter((st) => {
+      return st.willFit(comp);
+    }).sort((a, b) => {
+      return a.area - b.area;
+    })
+
+    //gets the fit with the smallest loss
+    stock = compatible[0];
+
+    if(stock){
+      setOrigin(stock);
+      canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale);
+      if(!stock.fitsExactly(comp)){
+        var difLength = stock.length - comp.length;
+        var difWidth = stock.width - comp.width;
+
+        if(difLength === 0){
+          usableStock.push(
+            new Stock(stock.length, difWidth, stock.x + comp.width, stock.y)
+          )
+        }else if(stock.width === comp.width){
+          usableStock.push(
+            new Stock(difLength, stock.width, stock.x, stock.y + comp.length)
+          )
+        }else{
+          usableStock.push(
+            new Stock(comp.length, stock.width - comp.width, stock.x + comp.width, stock.y),
+            new Stock(stock.length - comp.length, stock.width, stock.x, stock.y + comp.length)
+          )
+        }
       }
+      stock.allUsed = true;
     }else{
-      //generate & render new stock
+
     }
+    // setOrigin(stock);
+
+
+    //create new stock & disable used stock
+    // stock.allUsed = true;
+    usedStock.unshift(
+    )
   });
 
   canvas.stroke();
 }
 
-function setOrigin (stock, comp){
+function setOrigin (stock){
   origin.x = stock.x * scale;
   origin.y = stock.y * scale;
 }
