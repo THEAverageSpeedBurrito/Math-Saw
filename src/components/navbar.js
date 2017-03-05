@@ -1,5 +1,6 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
+import logo from '../assets/CircularSaw.svg'
 
 const NavBar = React.createClass({
 

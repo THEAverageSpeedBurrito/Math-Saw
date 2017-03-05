@@ -3,6 +3,7 @@ import { Container, Row, Col} from 'react-grid-system';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router'
+import logo from '../assets/CircularSaw.svg'
 
 var style = {
   navstyle: {
@@ -21,6 +22,10 @@ var style = {
     backgroundColor: '#3B0086',
     paddingTop: 75,
     color: 'white'
+  },
+  logo: {
+    height: 500,
+    width: 500,
   }
 }
 
@@ -56,8 +61,9 @@ const Landing = React.createClass({
             Welcome to Math Saw
             <br/>
             <Link to="/editor">
-              <RaisedButton label="Lets get editing!"/>
+              <RaisedButton label="Get Started"/>
             </Link>
+            <img src={logo} style={this.state.style.logo} alt="Circular saw"/>
           </div>
         </div>
       </div>
