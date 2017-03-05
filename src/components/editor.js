@@ -41,6 +41,7 @@ var style = {
     position: 'fixed',
     bottom: '20px',
     right: '20px',
+    backgroundColor: "slategray"
   }
 }
 
@@ -50,9 +51,12 @@ var Editor = React.createClass({
     return ({
       stock: [new Stock(48, 4)],
       components: [
-        new Stock(4,1),
-        new Stock(8,4),
-        new Stock(3,2)
+        new Component(4, 48),
+        new Component(2, 48),
+        new Component(2, 48),
+        new Component(4,1),
+        new Component(8,4),
+        new Component(3,2)
       ],
       length: '',
       width: '',
@@ -71,11 +75,34 @@ var Editor = React.createClass({
           components={this.state.components}
           stock={this.state.stock}
         />
+    }else{
+      render = (
+        <div>
+          <Row>
+            <Col sm={12} className="center">
+              <h2>Components</h2>
+            </Col>
+          </Row>
+          {
+            this.state.components.map((component) => {
+              return (
+                <Comp component={component}/>
+              )
+            })
+          }
+        </div>
+      )
     }
 
+    var expLabel;
+    if(!this.state.export){
+      expLabel = "Finish Design"
+    }else{
+      expLabel = "Keep Editing"
+    }
     return (
       <main>
-        <NavBar style={this.state.style}/>
+        <NavBar style={this.state.style} export={this.state.export}/>
         <Container className="container">
           <Paper style={style.paper}>
             <Row id="inputfields" className="center">
@@ -107,23 +134,11 @@ var Editor = React.createClass({
               </Col>
             </Row>
           </Paper>
-          <Paper style={style.paper}>
-            <Row>
-              <Col sm={12} className="center">
-                <h2>Components</h2>
-              </Col>
-            </Row>
-            {
-              this.state.components.map((component) => {
-                return (
-                  <Comp component={component}/>
-                )
-              })
-            }
-          </Paper>
+
           {render}
+
         </Container>
-        <RaisedButton label="Finish Design" style={style.expButton} onClick={this.renderCuts}/>
+        <RaisedButton label={expLabel} style={style.expButton} onClick={this.renderCuts} />
       </main>
     )
   },

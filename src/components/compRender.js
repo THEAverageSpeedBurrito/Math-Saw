@@ -9,8 +9,8 @@ const CompRender = React.createClass({
   },
 
   render() {
-    const width = 200; // canvas width
-    const height = 200; // canvas height
+    const width = 500; // canvas width
+    const height = 179; // canvas height
     const cameraPosition = new THREE.Vector3(0, 0, 5);
 
     return (<React3

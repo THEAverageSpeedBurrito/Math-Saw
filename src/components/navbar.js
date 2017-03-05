@@ -6,13 +6,13 @@ import {Link} from 'react-router'
 
 const NavBar = React.createClass({
 
-  componentDidMount: function () {
-
+  getInitialState() {
+    return ({
+      export: this.props.export
+    })
   },
 
   render: function () {
-
-    var navbar;
 
     return (
       <AppBar
@@ -20,9 +20,12 @@ const NavBar = React.createClass({
         style={this.props.style.navstyle}
         titleStyle={this.props.style.titlestyle}
         showMenuIconButton={false}
+        iconElementRight={<Link to="/"><RaisedButton label="Home"/></Link>}
       />
     )
-  }
+  },
+
 })
+
 
 export default NavBar;

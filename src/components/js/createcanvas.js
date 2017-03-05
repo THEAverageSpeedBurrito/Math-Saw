@@ -1,14 +1,15 @@
 var {Stock, Component} = require('./constructors')
-var origin = {x: 0, y: 0};
+var origin;
+var usedStock;
+var usableStock;
 var scale = 12;
-var usedStock = [];
-var usableStock = [];
 var canvas;
 
 function createCanvas (stock, components) {
   usedStock = [];
   usableStock = [];
   origin = {x: 0, y: 0}
+
   var root = document.getElementById('cutRender');
   canvas = root.getContext("2d");
 
