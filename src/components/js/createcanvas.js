@@ -6,6 +6,9 @@ var usableStock = [];
 var canvas;
 
 function createCanvas (stock, components) {
+  usedStock = [];
+  usableStock = [];
+  origin = {x: 0, y: 0}
   var root = document.getElementById('cutRender');
   canvas = root.getContext("2d");
 
@@ -16,6 +19,11 @@ function createCanvas (stock, components) {
   canvas.rect(origin.x, origin.y, usedStock[0].width * scale, usedStock[0].length * scale)
 
   usableStock.push(usedStock[0]);
+
+  components.sort((a, b) => {
+    return b.area - a.area;
+  });
+  console.log(components);
 
   components.forEach((comp) => {
     //gets the fit with the smallest loss
@@ -42,11 +50,10 @@ function createCanvas (stock, components) {
   });
 
   canvas.stroke();
-  console.log(components);
+
   root.addEventListener('click', function (event) {
     var x = event.pageX - root.offsetLeft;
     var y = event.pageY - root.offsetTop;
-    console.log(x, y);
 
     components.forEach((comp) => {
       if(x > comp.x && x < comp.x + comp.width && y > comp.y && y < comp.y + comp.length){
@@ -65,8 +72,8 @@ function setOrigin (stock){
 
 function calculatePlacement(stock, comp) {
   setOrigin(stock);
-  comp.x = origin.x;
-  comp.y = origin.y;
+  // comp.x = origin.x;
+  // comp.y = origin.y;
 
   canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale);
 
@@ -90,8 +97,8 @@ function calculatePlacement(stock, comp) {
     }
   }
   stock.allUsed = true;
-  comp.length *= scale;
-  comp.width *= scale;
+  // comp.length *= scale;
+  // comp.width *= scale;
 }
 
 function findFitting(comp){

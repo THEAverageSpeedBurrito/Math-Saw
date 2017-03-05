@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col} from 'react-grid-system';
 import Paper from 'material-ui/Paper';
 import CompRender from './compRender';
+import {List, ListItem} from 'material-ui/List';
 
 var style = {
   paper: {
@@ -27,15 +28,21 @@ const Comp = React.createClass({
       <Paper style={style.paper}>
         <Row>
           <Col sm={12} md={4}>
+            <List>
+              <ListItem primaryText={this.state.comp.length} secondaryText="Length" />
+              <ListItem primaryText={this.state.comp.width} secondaryText="Width" />
+              <ListItem primaryText={this.state.comp.length} secondaryText="Depth" />
+            </List>
+          </Col>
+          <Col sm={12} md={4}>
             <CompRender
-              length={this.state.comp.length}
-              width={this.state.comp.width}
+            length={this.state.comp.length}
+            width={this.state.comp.width}
             />
           </Col>
           <Col sm={12} md={4}>
-            <p>Length: {this.props.component.length}</p>
-            <p>Width: {this.props.component.width}</p>
-            <p>Area: {this.props.component.area}</p>
+            delete
+            edit
           </Col>
         </Row>
       </Paper>

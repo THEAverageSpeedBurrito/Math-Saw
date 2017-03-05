@@ -36,6 +36,11 @@ var style = {
     padding: 10,
     margin: '20px 0 20px 0',
     boxShadow: '0 0 10px 3px rgba(0,0,0,0.1)',
+  },
+  expButton: {
+    position: 'fixed',
+    bottom: '20px',
+    right: '20px',
   }
 }
 
@@ -45,9 +50,9 @@ var Editor = React.createClass({
     return ({
       stock: [new Stock(48, 4)],
       components: [
-        new Component(3, 20),
-        new Component(1, 20),
-        new Component(4, 8),
+        new Stock(4,1),
+        new Stock(8,4),
+        new Stock(3,2)
       ],
       length: '',
       width: '',
@@ -68,7 +73,7 @@ var Editor = React.createClass({
         />
     }
 
-    return(
+    return (
       <main>
         <NavBar style={this.state.style}/>
         <Container className="container">
@@ -116,7 +121,9 @@ var Editor = React.createClass({
               })
             }
           </Paper>
+          {render}
         </Container>
+        <RaisedButton label="Finish Design" style={style.expButton} onClick={this.renderCuts}/>
       </main>
     )
   },
@@ -153,15 +160,11 @@ var Editor = React.createClass({
     var components = this.state.components;
 
     this.setState({
-      export: true
+      export: !this.state.export
     })
   },
 
-  changeState: function () {
-    this.setState({
-      render: !this.state.render
-    });
-  }
+
 })
 
 export default Editor;

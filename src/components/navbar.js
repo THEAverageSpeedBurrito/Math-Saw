@@ -1,6 +1,8 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import logo from '../assets/CircularSaw.svg'
+import RaisedButton from 'material-ui/RaisedButton';
+import {Link} from 'react-router'
 
 const NavBar = React.createClass({
 

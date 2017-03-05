@@ -18,12 +18,13 @@ const CompRender = React.createClass({
       width={width}
       height={height}
       antialias={true}
+      clearColor={0xffffff}
     >
       <scene>
         <perspectiveCamera
           name="camera"
-          fov={90}
-          aspect={width / height}
+          fov={70}
+          aspect={width/height}
           near={0.1}
           far={1000}
 
