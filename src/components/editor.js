@@ -65,7 +65,6 @@ var Editor = React.createClass({
 
     return(
       <main>
-        <NavBar/>
         <Container className="container">
           <Row>
             <Col xs={12} sm={6}>

@@ -1,6 +1,6 @@
 var {Stock, Component} = require('./constructors')
 var origin = {x: 0, y: 0};
-var scale = 10;
+var scale = 12;
 var usedStock = [];
 var usableStock = [];
 var canvas;
@@ -42,6 +42,20 @@ function createCanvas (stock, components) {
   });
 
   canvas.stroke();
+  console.log(components);
+  root.addEventListener('click', function (event) {
+    var x = event.pageX - root.offsetLeft;
+    var y = event.pageY - root.offsetTop;
+    console.log(x, y);
+
+    components.forEach((comp) => {
+      if(x > comp.x && x < comp.x + comp.width && y > comp.y && y < comp.y + comp.length){
+        canvas.fillStyle = 'blue'
+        canvas.fillRect(comp.x, comp.y, comp.width, comp.length)
+        canvas.stroke();
+      }
+    })
+  })
 }
 
 function setOrigin (stock){
@@ -51,6 +65,9 @@ function setOrigin (stock){
 
 function calculatePlacement(stock, comp) {
   setOrigin(stock);
+  comp.x = origin.x;
+  comp.y = origin.y;
+
   canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale);
 
   if(!stock.fitsExactly(comp)){
@@ -73,6 +90,8 @@ function calculatePlacement(stock, comp) {
     }
   }
   stock.allUsed = true;
+  comp.length *= scale;
+  comp.width *= scale;
 }
 
 function findFitting(comp){

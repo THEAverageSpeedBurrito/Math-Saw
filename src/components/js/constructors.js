@@ -1,5 +1,7 @@
 //constructors
 function Component (length, width, x, y) {
+  this.x = x || 0;
+  this.y = y || 0;
   this.length = length;
   this.width = width;
   this.area = length * width;
