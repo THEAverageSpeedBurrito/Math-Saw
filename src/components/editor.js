@@ -113,7 +113,7 @@ var Editor = React.createClass({
     return (
       <main>
         <NavBar style={this.state.style} export={this.state.export}/>
-        <Container className="container">
+        <Container className="container" id="mainContainer">
           <div>
             <RaisedButton label="Dialog" onClick={this.handleModal} />
             <Dialog

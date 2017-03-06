@@ -51,15 +51,17 @@ function createCanvas (stock, components) {
 
   canvas.stroke();
 
-  root.addEventListener('click', function (event) {
-    var x = event.pageX - root.offsetLeft;
-    var y = event.pageY - root.offsetTop;
+  root.addEventListener('mousemove', function (event) {
+    var container = document.getElementById('mainContainer');
+    var x = event.pageX - root.offsetLeft - container.offsetLeft;
+    var y = event.pageY - root.offsetTop - container.offsetTop;
     console.log(x, y);
+    console.log(components);
 
     components.forEach((comp) => {
-      if(x > comp.x && x < comp.x + comp.width && y > comp.y && y < comp.y + comp.length){
+      if(x > comp.x && x < comp.x + comp.width * scale && y > comp.y && y < comp.y + comp.length * scale){
         canvas.fillStyle = 'blue'
-        canvas.fillRect(comp.x, comp.y, comp.width, comp.length)
+        canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
         canvas.stroke();
       }
     })
@@ -73,8 +75,8 @@ function setOrigin (stock){
 
 function calculatePlacement(stock, comp) {
   setOrigin(stock);
-  // comp.x = origin.x;
-  // comp.y = origin.y;
+  comp.x = origin.x;
+  comp.y = origin.y;
 
   canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale);
 
