@@ -1,7 +1,8 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import createCanvas from './js/createcanvas'
-//components
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+
 
 const Export = React.createClass({
   getInitialState: function () {
@@ -9,10 +10,6 @@ const Export = React.createClass({
       stock: this.props.stock,
       components: this.props.components,
     }
-  },
-
-  componentWillMount() {
-    console.log(this.state.stock, this.state.components);
   },
 
   componentDidMount: function () {
@@ -25,16 +22,24 @@ const Export = React.createClass({
     //perform algorithmic operation
     createCanvas(stock, components, root, canvas, scale);
 
+    //canvas functionality
     root.addEventListener('mousemove', function (event) {
       var container = document.getElementById('mainContainer');
       var x = event.pageX - root.offsetLeft - container.offsetLeft;
       var y = event.pageY - root.offsetTop - container.offsetTop;
+
+      var length = document.getElementById('length')
+      var width = document.getElementById('width')
+      var depth = document.getElementById('depth')
 
       components.forEach((comp) => {
         if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
           canvas.fillStyle = 'blue'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
           canvas.stroke();
+          length.textContent = comp.length
+          width.textContent = comp.width
+          depth.textContent = comp.depth
         }else{
           canvas.fillStyle = 'white'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
@@ -48,6 +53,24 @@ const Export = React.createClass({
   render: function () {
     return (
       <main>
+        <div>
+          <Table>
+            <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+              <TableRow>
+                <TableHeaderColumn>Length</TableHeaderColumn>
+                <TableHeaderColumn>Width</TableHeaderColumn>
+                <TableHeaderColumn>Depth</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+            <TableRow >
+                <TableRowColumn id="length"> </TableRowColumn>
+                <TableRowColumn id="width"> </TableRowColumn>
+                <TableRowColumn id="depth"> </TableRowColumn>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
         <canvas id="cutRender" width="800" height="800">
           Your browser does not support the HTML5 canvas tag.
         </canvas>
