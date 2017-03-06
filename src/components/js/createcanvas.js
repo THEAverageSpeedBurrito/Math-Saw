@@ -5,16 +5,17 @@ var usableStock;
 var scale;
 var canvas;
 
-function createCanvas (stock, components, root, canvasInherit, scaleInherit) {
+function createCanvas (stock, components, root, canvasInherit, scaleInherit, cutWidth) {
   usedStock = [];
   usableStock = [];
   origin = {x: 0, y: 0}
   canvas = canvasInherit;
   scale = scaleInherit;
+  cutWidth *= scale;
 
   //create and draw original stock
   if(usedStock.length === 0){
-    usedStock.push(new Stock(48, 4));
+    usedStock.push(new Stock(96, 4));
     usableStock.push(usedStock[0]);
   }
   canvas.rect(origin.x, origin.y, usedStock[0].width * scale, usedStock[0].length * scale)
@@ -29,7 +30,7 @@ function createCanvas (stock, components, root, canvasInherit, scaleInherit) {
     stock = findFitting(comp)[0];
 
     if(stock){
-      calculatePlacement(stock, comp);
+      calculatePlacement(stock, comp, cutWidth);
     }else{
       console.log("Cant seem to fit that anywhere, adding a new board");
       var stockOrigin = {
@@ -37,14 +38,14 @@ function createCanvas (stock, components, root, canvasInherit, scaleInherit) {
         y: 0
       }
 
-      var newStock = new Stock(48, 4, stockOrigin.x, stockOrigin.y);
+      var newStock = new Stock(96, 4, stockOrigin.x, stockOrigin.y);
       usedStock.unshift(newStock)
       usableStock.push(newStock);
 
       canvas.rect(newStock.x * scale, newStock.y * scale, newStock.width * scale, newStock.length * scale);
 
       stock = findFitting(comp)[0];
-      calculatePlacement(stock, comp);
+      calculatePlacement(stock, comp, cutWidth);
     }
   });
 
@@ -59,7 +60,7 @@ function setOrigin (stock){
   origin.y = stock.y * scale;
 }
 
-function calculatePlacement(stock, comp) {
+function calculatePlacement(stock, comp, cutWidth) {
   setOrigin(stock);
   comp.x = origin.x;
   comp.y = origin.y;
@@ -72,16 +73,16 @@ function calculatePlacement(stock, comp) {
 
     if(difLength === 0){
       usableStock.push(
-        new Stock(stock.length, difWidth, stock.x + comp.width, stock.y)
+        new Stock(stock.length, difWidth - cutWidth, stock.x + comp.width + cutWidth, stock.y)
       )
     }else if(stock.width === comp.width){
       usableStock.push(
-        new Stock(difLength, stock.width, stock.x, stock.y + comp.length)
+        new Stock(difLength - cutWidth, stock.width, stock.x, stock.y + comp.length + cutWidth)
       )
     }else{
       usableStock.push(
-        new Stock(comp.length, stock.width - comp.width, stock.x + comp.width, stock.y),
-        new Stock(stock.length - comp.length, stock.width, stock.x, stock.y + comp.length)
+        new Stock(comp.length, stock.width - comp.width - cutWidth, stock.x + comp.width + cutWidth, stock.y),
+        new Stock(stock.length - comp.length - cutWidth, stock.width, stock.x, stock.y + comp.length + cutWidth)
       )
     }
   }

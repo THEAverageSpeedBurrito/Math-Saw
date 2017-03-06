@@ -9,18 +9,20 @@ const Export = React.createClass({
     return {
       stock: this.props.stock,
       components: this.props.components,
+      cutWidth: this.props.cutWidth,
     }
   },
 
   componentDidMount: function () {
     var stock = this.state.stock;
     var components = this.state.components;
+    var cutWidth = this.state.cutWidth;
     var root = document.getElementById('cutRender');
     var canvas = root.getContext("2d");
-    var scale = 12;
+    var scale = 7;
 
     //perform algorithmic operation
-    createCanvas(stock, components, root, canvas, scale);
+    createCanvas(stock, components, root, canvas, scale, cutWidth);
 
     //canvas functionality
     root.addEventListener('mousemove', function (event) {
@@ -72,7 +74,7 @@ const Export = React.createClass({
             </TableBody>
           </Table>
         </div>
-        <canvas id="cutRender" width="800" height="800">
+        <canvas id="cutRender" width="800" height="1000">
           Your browser does not support the HTML5 canvas tag.
         </canvas>
       </main>

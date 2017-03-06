@@ -87,6 +87,7 @@ var Editor = React.createClass({
       render =  (<Export
           components={this.state.components}
           stock={this.state.stock}
+          cutWidth={this.state.cutWidth}
         />)
     }else{
       render = (
@@ -113,7 +114,7 @@ var Editor = React.createClass({
 
     return (
       <main>
-        <NavBar style={this.state.style} export={this.state.export}/>
+        <NavBar style={this.state.style}/>
         <Container className="container" id="mainContainer">
           <div>
             <RaisedButton label="Dialog" onClick={this.handleModal} />
@@ -240,15 +241,15 @@ var Editor = React.createClass({
   //take array of object classes
   //returns array of canvas objects to br rendered
   renderCuts: function () {
-    var stock = this.state.stock.slice(0);
-    var components = this.state.components.slice(0);
+    var stock = this.state.stock;
+    var components = this.state.components;
+    var cutWidth = this.state.cutWidth
 
     this.setState({
       export: !this.state.export
     })
   },
 
-  //Opens & closes modal
   handleModal() {
     this.setState({
       open: !this.state.open
@@ -256,7 +257,7 @@ var Editor = React.createClass({
   },
 
   changeCutWidth(event) {
-    let newWidth = event.target.value;
+    let newWidth = parseInt(event.target.value);
     this.setState({
       cutWidth: newWidth
     });
