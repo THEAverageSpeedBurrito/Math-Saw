@@ -53,9 +53,9 @@ var Editor = React.createClass({
     return ({
       stock: [],
       components: [
-        new Component(4, 48, 0, 0, 'name'),
-        new Component(2, 48, 0, 0, 'name'),
-        new Component(2, 48, 0, 0, 'name'),
+        // new Component(4, 48, 0, 0, 'name'),
+        // new Component(2, 48, 0, 0, 'name'),
+        // new Component(2, 48, 0, 0, 'name'),
         new Component(4,1, 0, 0, 'name'),
         new Component(8,4, 0, 0, 'name'),
         new Component(3,2, 0, 0, 'name')
@@ -65,7 +65,7 @@ var Editor = React.createClass({
       name: '',
       export: false,
       style: style,
-      open: false,
+      open: true,
       cutWidth: .125,
       projectName: '',
     })
@@ -169,6 +169,9 @@ var Editor = React.createClass({
               </Row>
             </Dialog>
           </div>
+          <div className="center">
+            <h1>{this.state.projectName}</h1>
+          </div>
           <Paper style={style.paper}>
             <Row id="inputfields" className="center">
               <Col sm={12}>
@@ -229,6 +232,7 @@ var Editor = React.createClass({
     this.setState({
       length: '',
       width: '',
+      name: '',
     })
     console.log(this.state.components);
   },
