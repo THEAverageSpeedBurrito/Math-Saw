@@ -21,6 +21,11 @@ const Export = React.createClass({
     var canvas = root.getContext("2d");
     var scale = 7;
 
+    //set dimensions of canvas
+    var canvasContainer = document.getElementById('canvasContainer');
+    root.height = canvasContainer.offsetHeight
+    root.width = canvasContainer.offsetWidth;
+
     //perform algorithmic operation
     createCanvas(stock, components, root, canvas, scale, cutWidth);
 
@@ -55,7 +60,7 @@ const Export = React.createClass({
   //basic wrapper html
   render: function () {
     return (
-      <main>
+      <main id="export">
         <div>
           <Table>
             <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
@@ -74,9 +79,11 @@ const Export = React.createClass({
             </TableBody>
           </Table>
         </div>
-        <canvas id="cutRender" width="800" height="1000">
-          Your browser does not support the HTML5 canvas tag.
-        </canvas>
+        <div id="canvasContainer">
+          <canvas id="cutRender" className='canvas'>
+            Your browser does not support the HTML5 canvas tag.
+          </canvas>
+        </div>
       </main>
     )
   },

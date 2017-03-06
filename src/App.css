@@ -21,9 +21,21 @@ html, body {
 .center {
   text-align: center;
 }
+
 .right {
   width: 100%;
   margin: 0;
   padding: 0;
   text-align: right;
+}
+
+#canvasContainer {
+  width: 100%;
+  max-width: 960px;
+  height: 800px;
+  margin: 0px auto;
+  border: 1px solid black
+}
+.canvas {
+  border: 1px solid black;
 }

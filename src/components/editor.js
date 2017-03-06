@@ -47,7 +47,6 @@ var style = {
   }
 }
 
-
 var Editor = React.createClass({
   getInitialState: function () {
     return ({
