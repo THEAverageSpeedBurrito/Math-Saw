@@ -16,18 +16,17 @@ function createCanvas (stock, components) {
   //create and draw original stock
   if(usedStock.length === 0){
     usedStock.push(new Stock(48, 4));
+    usableStock.push(usedStock[0]);
   }
   canvas.rect(origin.x, origin.y, usedStock[0].width * scale, usedStock[0].length * scale)
 
-  usableStock.push(usedStock[0]);
-
+  //sort components largest area first
   components.sort((a, b) => {
     return b.area - a.area;
   });
-  console.log(components);
 
   components.forEach((comp) => {
-    //gets the fit with the smallest loss
+    //gets the fit with the smallest loss of area
     stock = findFitting(comp)[0];
 
     if(stock){
@@ -55,6 +54,7 @@ function createCanvas (stock, components) {
   root.addEventListener('click', function (event) {
     var x = event.pageX - root.offsetLeft;
     var y = event.pageY - root.offsetTop;
+    console.log(x, y);
 
     components.forEach((comp) => {
       if(x > comp.x && x < comp.x + comp.width && y > comp.y && y < comp.y + comp.length){

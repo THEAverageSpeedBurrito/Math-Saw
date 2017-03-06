@@ -1,11 +1,12 @@
 import React from 'react';
 var {Component, Stock} = require('./js/constructors');
 import { Container, Row, Col} from 'react-grid-system';
-
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-
+import Dialog from 'material-ui/Dialog';
+import Checkbox from 'material-ui/Checkbox';
+import Divider from 'material-ui/Divider';
 
 //Components
 import NavBar from './navbar';
@@ -52,45 +53,52 @@ var Editor = React.createClass({
     return ({
       stock: [new Stock(48, 4)],
       components: [
-        new Component(4, 48),
-        new Component(2, 48),
-        new Component(2, 48),
-        new Component(4,1),
-        new Component(8,4),
-        new Component(3,2)
+        // new Component(4, 48),
+        // new Component(2, 48),
+        // new Component(2, 48),
+        // new Component(4,1),
+        // new Component(8,4),
+        // new Component(3,2)
       ],
       length: '',
       width: '',
       export: false,
-      style: style
+      style: style,
+      open: false,
+      cutWidth: .125,
+      projectName: '',
     })
   },
 
   render: function() {
+    const actions = [
+      <RaisedButton
+        label="Create Project"
+        primary={true}
+        onClick={this.handleModal}
+      />
+    ];
 
     var which;
 
     var render;
     if(this.state.export){
-    render =  <Export
+      render =  (<Export
           components={this.state.components}
           stock={this.state.stock}
-        />
+        />)
     }else{
       render = (
         <div>
           <Row>
-            <Col sm={12} className="center">
-              <h2>Components</h2>
-            </Col>
+            {
+              this.state.components.map((component) => {
+                return (
+                  <Comp component={component}/>
+                )
+              })
+            }
           </Row>
-          {
-            this.state.components.map((component) => {
-              return (
-                <Comp component={component}/>
-              )
-            })
-          }
         </div>
       )
     }
@@ -101,10 +109,61 @@ var Editor = React.createClass({
     }else{
       expLabel = "Keep Editing"
     }
+
     return (
       <main>
         <NavBar style={this.state.style} export={this.state.export}/>
         <Container className="container">
+          <div>
+            <RaisedButton label="Dialog" onClick={this.handleModal} />
+            <Dialog
+              title="Project Information"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleModal}
+            >
+            <Row>
+              <Col sm={12} md={6}>
+                <TextField
+                floatingLabelText="Project Name"
+                value={this.state.projectName}
+                onChange={this.changeName}
+                />
+              </Col>
+              <Col sm={12} md={6}>
+                <TextField
+                floatingLabelText="Cut Width"
+                value={this.state.cutWidth}
+                onChange={this.changeCutWidth}
+                />
+              </Col>
+            </Row>
+              <p>Avaiable types of stock</p>
+              <Row>
+                <Col sm={3}>
+                  <Checkbox
+                    label="2x4 8'"
+                  />
+                </Col>
+                <Col sm={3}>
+                  <Checkbox
+                    label="2x4 10'"
+                  />
+                </Col>
+                <Col sm={3}>
+                  <Checkbox
+                    label="2x6 8'"
+                  />
+                </Col>
+                <Col sm={3}>
+                  <Checkbox
+                    label="2x6 10'"
+                  />
+                </Col>
+              </Row>
+            </Dialog>
+          </div>
           <Paper style={style.paper}>
             <Row id="inputfields" className="center">
               <Col sm={12}>
@@ -180,6 +239,26 @@ var Editor = React.createClass({
     })
   },
 
+  //Opens & closes modal
+  handleModal() {
+    this.setState({
+      open: !this.state.open
+    })
+  },
+
+  changeCutWidth(event) {
+    let newWidth = event.target.value;
+    this.setState({
+      cutWidth: newWidth
+    });
+  },
+
+  changeName(event) {
+    let newName = event.target.value;
+    this.setState({
+      projectName: newName
+    })
+  }
 
 })
 

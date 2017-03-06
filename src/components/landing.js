@@ -7,7 +7,7 @@ import logo from '../assets/CircularSaw.svg'
 
 var style = {
   navstyle: {
-    backgroundColor: "#6200B3",
+    backgroundColor: "#0365B5",
     color: "#114B5F",
     position: 'fixed',
     top: '0',
@@ -18,10 +18,17 @@ var style = {
     fontFamily: 'VT323, monospace',
     fontSize: 50
   },
-  header: {
-    backgroundColor: '#3B0086',
-    paddingTop: 75,
+  upper: {
+    backgroundColor: '#353531',
     color: 'white'
+  },
+  lower: {
+    height: 100,
+    width: 100,
+    position: 'absolute',
+    top: 200,
+    backgroundColor: '#0365B5',
+    zIndex: '-1'
   },
   logo: {
     height: 500,
@@ -33,8 +40,10 @@ const Landing = React.createClass({
   getInitialState: function () {
     var height = window.innerHeight;
     var width = window.innerWidth;
-    style.header.height = height;
-    style.header.width = width;
+    style.upper.height = height;
+    style.upper.width = width;
+    style.lower.height = height;
+    style.lower.width = width;
 
     return ({
       style: style,
@@ -49,22 +58,11 @@ const Landing = React.createClass({
   render: function() {
     return (
       <div>
-      <AppBar
-        title="Math Saw"
-        className=""
-        style={this.state.style.navstyle}
-        titleStyle={this.state.style.titlestyle}
-        showMenuIconButton={false}
-      />
-        <div style={this.state.style.header}>
-          <div className="container">
-            Welcome to Math Saw
-            <br/>
-            <Link to="/editor">
-              <RaisedButton label="Get Started"/>
-            </Link>
+        <div style={this.state.style.upper}>
+          <div className="container center">
             <img src={logo} style={this.state.style.logo} alt="Circular saw"/>
           </div>
+          <div style={this.state.style.lower}/>
         </div>
       </div>
     )
@@ -73,8 +71,10 @@ const Landing = React.createClass({
   setFullWidth() {
     var height = window.innerHeight;
     var width = window.innerWidth;
-    style.header.height = height;
-    style.header.width = width;
+    style.upper.height = height;
+    style.upper.width = width;
+    style.lower.height = height;
+    style.lower.width = width;
 
     this.setState({
       style: style

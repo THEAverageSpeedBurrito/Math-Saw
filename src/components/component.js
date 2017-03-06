@@ -3,8 +3,8 @@ import { Container, Row, Col} from 'react-grid-system';
 import Paper from 'material-ui/Paper';
 import CompRender from './compRender';
 import {List, ListItem} from 'material-ui/List';
-import SvgIcon from 'material-ui/SvgIcon';
-import ActionHome from 'material-ui/svg-icons/action/home';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
 var style = {
   paper: {
@@ -19,6 +19,11 @@ var style = {
     height: 1000
   },
   innerList: {
+    height: 53,
+    padding: '10px 10px',
+    margin: '10px 0 10px 0'
+  },
+  innerListAction: {
     height: 53,
     padding: '10px 10px 10px 50px',
     margin: '10px 0 10px 0'
@@ -42,10 +47,10 @@ const Comp = React.createClass({
   render() {
     return (
         <Row>
-            <Col sm={6} md={2}>
+          <Col sm={6} md={2}>
               <Paper style={style.paper} zDepth={0}>
                 <List style={style.list}>
-                  <ListItem primaryText={this.state.comp.length} secondaryText="Name" innerDivStyle={style.innerList}/>
+                  <ListItem primaryText={this.state.comp.length} secondaryText="Length" innerDivStyle={style.innerList}/>
                   <ListItem primaryText={this.state.comp.width} secondaryText="Width" innerDivStyle={style.innerList}/>
                   <ListItem primaryText={this.state.comp.length} secondaryText="Depth" innerDivStyle={style.innerList}/>
                 </List>
@@ -54,9 +59,9 @@ const Comp = React.createClass({
             <Col sm={6} md={3}>
               <Paper style={style.paper}>
                 <List style={style.list}>
-                  <ListItem primaryText="Component" secondaryText="Width" innerDivStyle={style.innerList} leftIcon={<ActionHome style={style.iconStyle}/>}/>
-                  <ListItem primaryText="Delete" secondaryText="Width" innerDivStyle={style.innerList}/>
-                  <ListItem primaryText="Count" secondaryText="Depth" innerDivStyle={style.innerList}/>
+                  <ListItem primaryText="Component" secondaryText="Name" innerDivStyle={style.innerList}/>
+                  <ListItem primaryText="Delete" innerDivStyle={style.innerList}/>
+                  <ListItem primaryText="Edit" innerDivStyle={style.innerList}/>
                 </List>
               </Paper>
             </Col>

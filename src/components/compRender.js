@@ -9,9 +9,10 @@ const CompRender = React.createClass({
   },
 
   render() {
-    const width = 500; // canvas width
+    const width = 200; // canvas width
     const height = 179; // canvas height
     const cameraPosition = new THREE.Vector3(0, 0, 5);
+
 
     return (<React3
       mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below
