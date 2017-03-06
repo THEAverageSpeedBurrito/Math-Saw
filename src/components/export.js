@@ -30,16 +30,17 @@ const Export = React.createClass({
 
       var length = document.getElementById('length')
       var width = document.getElementById('width')
-      var depth = document.getElementById('depth')
+      var name = document.getElementById('name')
 
       components.forEach((comp) => {
         if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
           canvas.fillStyle = 'blue'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
           canvas.stroke();
+
           length.textContent = comp.length
           width.textContent = comp.width
-          depth.textContent = comp.depth
+          name.textContent = comp.name
         }else{
           canvas.fillStyle = 'white'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
@@ -57,16 +58,16 @@ const Export = React.createClass({
           <Table>
             <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
-                <TableHeaderColumn>Length</TableHeaderColumn>
+                <TableHeaderColumn>Name</TableHeaderColumn>
                 <TableHeaderColumn>Width</TableHeaderColumn>
                 <TableHeaderColumn>Depth</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
             <TableRow >
-                <TableRowColumn id="length"> </TableRowColumn>
-                <TableRowColumn id="width"> </TableRowColumn>
-                <TableRowColumn id="depth"> </TableRowColumn>
+                <TableRowColumn id="name"></TableRowColumn>
+                <TableRowColumn id="length"></TableRowColumn>
+                <TableRowColumn id="width"></TableRowColumn>
               </TableRow>
             </TableBody>
           </Table>

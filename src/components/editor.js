@@ -53,15 +53,16 @@ var Editor = React.createClass({
     return ({
       stock: [],
       components: [
-        new Component(4, 48),
-        new Component(2, 48),
-        new Component(2, 48),
-        new Component(4,1),
-        new Component(8,4),
-        new Component(3,2)
+        new Component(4, 48, 0, 0, 'name'),
+        new Component(2, 48, 0, 0, 'name'),
+        new Component(2, 48, 0, 0, 'name'),
+        new Component(4,1, 0, 0, 'name'),
+        new Component(8,4, 0, 0, 'name'),
+        new Component(3,2, 0, 0, 'name')
       ],
       length: '',
       width: '',
+      name: '',
       export: false,
       style: style,
       open: false,
@@ -128,7 +129,7 @@ var Editor = React.createClass({
                 <TextField
                 floatingLabelText="Project Name"
                 value={this.state.projectName}
-                onChange={this.changeName}
+                onChange={this.projectName}
                 />
               </Col>
               <Col sm={12} md={6}>
@@ -172,6 +173,12 @@ var Editor = React.createClass({
             <Row id="inputfields" className="center">
               <Col sm={12}>
                 <input
+                placeholder="Name"
+                onChange={this.componentName}
+                value={this.state.name}
+                style={style.input}
+                />
+                <input
                 style={style.input}
                 placeholder="Length"
                 onChange={this.setLength}
@@ -181,12 +188,6 @@ var Editor = React.createClass({
                 placeholder="Width"
                 onChange={this.setWidth}
                 value={this.state.width}
-                style={style.input}
-                />
-                <input
-                placeholder="Depth"
-                onChange={this.setDepth}
-                value={this.state.depth}
                 style={style.input}
                 />
               </Col>
@@ -220,16 +221,16 @@ var Editor = React.createClass({
   addComponent: function (event) {
     event.preventDefault()
 
-    var {length, width} = this.state;
+    var {length, width, name} = this.state;
 
-    this.state.components.push(new Component(parseInt(length), parseInt(width)))
+    this.state.components.push(new Component(parseInt(length), parseInt(width), 0, 0, name))
     this.state.components[this.state.components.length - 1].id = this.state.components.length - 1
 
     this.setState({
       length: '',
       width: '',
     })
-
+    console.log(this.state.components);
   },
 
   //take array of object classes
@@ -257,12 +258,19 @@ var Editor = React.createClass({
     });
   },
 
-  changeName(event) {
+  projectName(event) {
     let newName = event.target.value;
     this.setState({
       projectName: newName
     })
   },
+
+  componentName(event) {
+    let newName = event.target.value;
+    this.setState({
+      name: newName
+    })
+  }
 
 })
 

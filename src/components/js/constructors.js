@@ -1,5 +1,6 @@
 //constructors
-function Component (length, width, x, y) {
+function Component (length, width, x, y, name) {
+  this.name = name;
   this.x = x || 0;
   this.y = y || 0;
   this.length = length;
