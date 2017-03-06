@@ -18,21 +18,39 @@ const Export = React.createClass({
   componentDidMount: function () {
     var stock = this.state.stock;
     var components = this.state.components;
-    //Initialize lodaing animation
+    var root = document.getElementById('cutRender');
+    var canvas = root.getContext("2d");
+    var scale = 12;
 
     //perform algorithmic operation
-    createCanvas(stock, components);
+    createCanvas(stock, components, root, canvas, scale);
+
+    root.addEventListener('mousemove', function (event) {
+      var container = document.getElementById('mainContainer');
+      var x = event.pageX - root.offsetLeft - container.offsetLeft;
+      var y = event.pageY - root.offsetTop - container.offsetTop;
+
+      components.forEach((comp) => {
+        if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
+          canvas.fillStyle = 'blue'
+          canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
+          canvas.stroke();
+        }else{
+          canvas.fillStyle = 'white'
+          canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
+          canvas.stroke();
+        }
+      })
+    })
   },
 
   //basic wrapper html
   render: function () {
     return (
       <main>
-          <div className="container">
-            <canvas id="cutRender" width="800" height="800">
-              Your browser does not support the HTML5 canvas tag.
-            </canvas>
-          </div>
+        <canvas id="cutRender" width="800" height="800">
+          Your browser does not support the HTML5 canvas tag.
+        </canvas>
       </main>
     )
   },
