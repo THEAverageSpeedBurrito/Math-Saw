@@ -51,14 +51,14 @@ var style = {
 var Editor = React.createClass({
   getInitialState: function () {
     return ({
-      stock: [new Stock(48, 4)],
+      stock: [],
       components: [
-        // new Component(4, 48),
-        // new Component(2, 48),
-        // new Component(2, 48),
-        // new Component(4,1),
-        // new Component(8,4),
-        // new Component(3,2)
+        new Component(4, 48),
+        new Component(2, 48),
+        new Component(2, 48),
+        new Component(4,1),
+        new Component(8,4),
+        new Component(3,2)
       ],
       length: '',
       width: '',
@@ -144,21 +144,25 @@ var Editor = React.createClass({
                 <Col sm={3}>
                   <Checkbox
                     label="2x4 8'"
+                    onCheck={() => this.addStock(new Stock(96, 4))}
                   />
                 </Col>
                 <Col sm={3}>
                   <Checkbox
                     label="2x4 10'"
+                    onCheck={() => this.addStock(new Stock(120, 4))}
                   />
                 </Col>
                 <Col sm={3}>
                   <Checkbox
                     label="2x6 8'"
+                    onCheck={() => this.addStock(new Stock(96, 6))}
                   />
                 </Col>
                 <Col sm={3}>
                   <Checkbox
                     label="2x6 10'"
+                    onCheck={() => this.addStock(new Stock(120, 6))}
                   />
                 </Col>
               </Row>
@@ -258,7 +262,7 @@ var Editor = React.createClass({
     this.setState({
       projectName: newName
     })
-  }
+  },
 
 })
 
