@@ -55,12 +55,14 @@ function createCanvas (stock, components) {
     var container = document.getElementById('mainContainer');
     var x = event.pageX - root.offsetLeft - container.offsetLeft;
     var y = event.pageY - root.offsetTop - container.offsetTop;
-    console.log(x, y);
-    console.log(components);
 
     components.forEach((comp) => {
-      if(x > comp.x && x < comp.x + comp.width * scale && y > comp.y && y < comp.y + comp.length * scale){
+      if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
         canvas.fillStyle = 'blue'
+        canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
+        canvas.stroke();
+      }else{
+        canvas.fillStyle = 'white'
         canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
         canvas.stroke();
       }
