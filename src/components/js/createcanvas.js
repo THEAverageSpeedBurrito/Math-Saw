@@ -58,15 +58,15 @@ function createCanvas (stock, components, parent) {
     var y = event.pageY - root.offsetTop - container.offsetTop;
 
     components.forEach((comp) => {
-      // if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
-      //   canvas.fillStyle = 'blue'
-      //   canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
-      //   canvas.stroke();
-      // }else{
-      //   canvas.fillStyle = 'white'
-      //   canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
-      //   canvas.stroke();
-      // }
+      if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
+        canvas.fillStyle = 'blue'
+        canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
+        canvas.stroke();
+      }else{
+        canvas.fillStyle = 'white'
+        canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
+        canvas.stroke();
+      }
     })
   })
 }
