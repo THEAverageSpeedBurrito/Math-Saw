@@ -5,7 +5,7 @@ var usableStock;
 var scale = 12;
 var canvas;
 
-function createCanvas (stock, components, parent) {
+function createCanvas (stock, components) {
   usedStock = [];
   usableStock = [];
   origin = {x: 0, y: 0}

@@ -11,13 +11,17 @@ const Export = React.createClass({
     }
   },
 
+  componentWillMount() {
+    console.log(this.state.stock, this.state.components);
+  },
+
   componentDidMount: function () {
     var stock = this.state.stock;
     var components = this.state.components;
     //Initialize lodaing animation
 
     //perform algorithmic operation
-    createCanvas(stock, components, this);
+    createCanvas(stock, components);
   },
 
   //basic wrapper html

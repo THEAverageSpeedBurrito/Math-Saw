@@ -235,8 +235,8 @@ var Editor = React.createClass({
   //take array of object classes
   //returns array of canvas objects to br rendered
   renderCuts: function () {
-    var stock = this.state.stock;
-    var components = this.state.components;
+    var stock = this.state.stock.slice(0);
+    var components = this.state.components.slice(0);
 
     this.setState({
       export: !this.state.export
