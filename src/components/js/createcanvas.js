@@ -5,7 +5,7 @@ var usableStock;
 var scale = 12;
 var canvas;
 
-function createCanvas (stock, components) {
+function createCanvas (stock, components, parent) {
   usedStock = [];
   usableStock = [];
   origin = {x: 0, y: 0}
@@ -51,21 +51,22 @@ function createCanvas (stock, components) {
 
   canvas.stroke();
 
+  //Canvas interactivity
   root.addEventListener('mousemove', function (event) {
     var container = document.getElementById('mainContainer');
     var x = event.pageX - root.offsetLeft - container.offsetLeft;
     var y = event.pageY - root.offsetTop - container.offsetTop;
 
     components.forEach((comp) => {
-      if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
-        canvas.fillStyle = 'blue'
-        canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
-        canvas.stroke();
-      }else{
-        canvas.fillStyle = 'white'
-        canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
-        canvas.stroke();
-      }
+      // if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
+      //   canvas.fillStyle = 'blue'
+      //   canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
+      //   canvas.stroke();
+      // }else{
+      //   canvas.fillStyle = 'white'
+      //   canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
+      //   canvas.stroke();
+      // }
     })
   })
 }

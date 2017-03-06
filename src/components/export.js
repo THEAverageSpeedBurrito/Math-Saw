@@ -7,7 +7,7 @@ const Export = React.createClass({
   getInitialState: function () {
     return {
       stock: this.props.stock,
-      components: this.props.components
+      components: this.props.components,
     }
   },
 
@@ -17,7 +17,7 @@ const Export = React.createClass({
     //Initialize lodaing animation
 
     //perform algorithmic operation
-    createCanvas(stock, components);
+    createCanvas(stock, components, this);
   },
 
   //basic wrapper html
