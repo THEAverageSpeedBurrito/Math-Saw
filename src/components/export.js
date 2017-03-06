@@ -26,6 +26,12 @@ const Export = React.createClass({
     root.height = canvasContainer.offsetHeight
     root.width = canvasContainer.offsetWidth;
 
+    window.addEventListener('resize', function () {
+      root.height = canvasContainer.offsetHeight
+      root.width = canvasContainer.offsetWidth;
+      createCanvas(stock, components, root, canvas, scale, cutWidth)
+    })
+
     //perform algorithmic operation
     createCanvas(stock, components, root, canvas, scale, cutWidth);
 
