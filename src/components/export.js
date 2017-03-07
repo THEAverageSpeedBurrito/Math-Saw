@@ -19,7 +19,7 @@ const Export = React.createClass({
     var cutWidth = this.state.cutWidth;
     var root = document.getElementById('cutRender');
     var canvas = root.getContext("2d");
-    var scale = 7;
+    var scale = 10;
 
     //set dimensions of canvas
     var canvasContainer = document.getElementById('canvasContainer');

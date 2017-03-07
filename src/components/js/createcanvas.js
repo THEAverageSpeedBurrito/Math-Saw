@@ -11,8 +11,8 @@ function createCanvas (stock, components, root, canvasInherit, scaleInherit, cut
   origin = {x: 0, y: 0}
   canvas = canvasInherit;
   scale = scaleInherit;
-  cutWidth *= scale;
 
+  canvas.lineWidth = 10;
   //create and draw original stock
   if(usedStock.length === 0){
     usedStock.push(new Stock(96, 4));

@@ -5,7 +5,20 @@ import ReactDOM from 'react-dom';
 
 const CompRender = React.createClass({
   getInitialState() {
-    return null;
+    var rotationY = Math.floor(Math.random(10)*10)
+    return ({
+      cubeRotation: new THREE.Euler(0, rotationY, 0)
+    })
+  },
+
+  onAnimate() {
+    this.setState({
+      cubeRotation: new THREE.Euler(
+        0,
+        this.state.cubeRotation.y + 0.005,
+        0
+      ),
+    });
   },
 
   render() {
@@ -15,11 +28,13 @@ const CompRender = React.createClass({
 
 
     return (<React3
-      mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below
+      mainCamera="camera"
       width={width}
       height={height}
       antialias={true}
       clearColor={0xffffff}
+
+      onAnimate={this.onAnimate}
     >
       <scene>
         <perspectiveCamera
@@ -28,24 +43,25 @@ const CompRender = React.createClass({
           aspect={width/height}
           near={0.1}
           far={1000}
-
           position={cameraPosition}
         />
-        <mesh
-          rotation={new THREE.Euler(
-            0.5,
-            0.5,
-            0
-          )}
-        >
+
+        <ambientLight color={0x404040}/>
+
+        <directionalLight
+          color={0xffffff}
+          position={new THREE.Vector3(0, 10, 10)}
+          lookAt={new THREE.Vector3(0, 0, 0)}
+        />
+
+        <mesh rotation={this.state.cubeRotation}>
+
           <boxGeometry
             width={this.props.width/2}
             height={this.props.length/2}
             depth={1}
           />
-          <meshBasicMaterial
-            color={0x00ff00}
-          />
+          <meshLambertMaterial color={0x00ff00}/>
         </mesh>
       </scene>
     </React3>);
