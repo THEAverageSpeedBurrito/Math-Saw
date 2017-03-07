@@ -45,6 +45,7 @@ const Comp = React.createClass({
   render() {
     var comp = this.state.comp;
     var key = comp.name.replace(' ', '');
+
     return (
         <Col sm={12} md={6} lg={4} key={key}>
           <Card style={style.card}>
@@ -54,18 +55,20 @@ const Comp = React.createClass({
             <Divider/>
             <CardTitle title={comp.name} />
             <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+              Measurement data goes here
             </CardText>
             <CardActions>
               <RaisedButton label="Edit"/>
-              <RaisedButton label="Delete"/>
+              <RaisedButton label="Delete" onClick={() => this.deleteComponent(comp.id)}/>
             </CardActions>
           </Card>
         </Col>
     )
+  },
+
+  deleteComponent(id){
+    console.log(id);
+    this.props.delete(id)
   }
 });
 

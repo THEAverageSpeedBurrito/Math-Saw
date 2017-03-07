@@ -54,9 +54,9 @@ var Editor = React.createClass({
         // new Component(4, 48, 0, 0, 'name'),
         // new Component(2, 48, 0, 0, 'name'),
         // new Component(2, 48, 0, 0, 'name'),
-        new Component(4,1, 0, 0, 'Comp 1'),
-        new Component(8,4, 0, 0, 'Leg'),
-        new Component(3,2, 0, 0, 'Something')
+        // new Component(4,1, 0, 0, 'Comp 1'),
+        // new Component(8,4, 0, 0, 'Leg', 0),
+        // new Component(3,2, 0, 0, 'Something')
       ],
       length: '',
       width: '',
@@ -94,7 +94,7 @@ var Editor = React.createClass({
             {
               this.state.components.map((component) => {
                 return (
-                  <Comp component={component}/>
+                  <Comp component={component} delete={this.handleDeletion}/>
                 )
               })
             }
@@ -224,15 +224,16 @@ var Editor = React.createClass({
     event.preventDefault()
 
     var {length, width, name} = this.state;
+    var id = this.state.components.length;
 
-    this.state.components.push(new Component(parseInt(length), parseInt(width), 0, 0, name))
+    this.state.components.push(new Component(parseInt(length), parseInt(width), 0, 0, name, id))
     this.state.components[this.state.components.length - 1].id = this.state.components.length - 1
 
     this.setState({
       length: '',
       width: '',
       name: '',
-    })
+    });
   },
 
   //take array of object classes
@@ -272,6 +273,10 @@ var Editor = React.createClass({
     this.setState({
       name: newName
     })
+  },
+
+  handleDeletion(id) {
+    console.log(id);
   }
 
 })

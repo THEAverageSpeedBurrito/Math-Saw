@@ -43,7 +43,7 @@ const CompRender = React.createClass({
       width={this.state.fullWidth}
       height={this.state.fullHeight}
       antialias={true}
-      clearColor={0x000000}
+      clearColor={0xffffff}
       onAnimate={this.onAnimate}
       >
       <scene>
