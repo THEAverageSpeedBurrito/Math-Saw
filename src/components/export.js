@@ -72,8 +72,8 @@ const Export = React.createClass({
             <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>Name</TableHeaderColumn>
+                <TableHeaderColumn>Length</TableHeaderColumn>
                 <TableHeaderColumn>Width</TableHeaderColumn>
-                <TableHeaderColumn>Depth</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
@@ -86,7 +86,7 @@ const Export = React.createClass({
           </Table>
         </div>
         <div id="canvasContainer">
-          <canvas id="cutRender">
+          <canvas id="cutRender" length="100" width="100">
             Your browser does not support the HTML5 canvas tag.
           </canvas>
         </div>
