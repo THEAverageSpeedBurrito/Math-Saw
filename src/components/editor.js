@@ -276,7 +276,15 @@ var Editor = React.createClass({
   },
 
   handleDeletion(id) {
-    console.log(id);
+    var newComponentsList = this.state.components.filter((comp) => {
+      return (comp.id !== id)
+    });
+
+    this.setState({
+      components: newComponentsList
+    })
+
+    console.log(newComponentsList);
   }
 
 })
