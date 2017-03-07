@@ -49,9 +49,7 @@ function createCanvas (stock, components, root, canvasInherit, scaleInherit, cut
   });
 
   canvas.stroke();
-
-  //Canvas interactivity
-
+  return usedStock;
 }
 
 function setOrigin (stock){
