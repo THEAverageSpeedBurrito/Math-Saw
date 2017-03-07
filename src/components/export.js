@@ -6,7 +6,9 @@ import {Row, Col} from 'react-grid-system';
 import {List, ListItem} from 'material-ui/List';
 
 var stats = {
+  compCount: 0,
   areaUsed: 0,
+  stockCount: 0,
   stockArea: 0,
   waste: 0,
 }
@@ -47,7 +49,6 @@ const Export = React.createClass({
       stock: usedStock
     }, function() {
       this.calculateStats();
-      console.log(this.state.stats);
     });
 
     //canvas functionality
@@ -70,7 +71,7 @@ const Export = React.createClass({
           length.textContent = comp.length + 'in'
           width.textContent = comp.width + 'in'
           name.textContent = comp.name
-          area.textContent = comp.area + 'in'
+          area.textContent = comp.area + 'in^2'
         }else{
           canvas.fillStyle = 'white'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
@@ -107,7 +108,9 @@ const Export = React.createClass({
         <Row>
           <Col sm={12} md={3}>
             <List>
+              <ListItem primaryText={this.state.stats.compCount} secondaryText="Total Components" />
               <ListItem primaryText={this.state.stats.areaUsed} secondaryText="Component Area"/>
+              <ListItem primaryText={this.state.stats.stockCount} secondaryText="Boards Used" />
               <ListItem primaryText={this.state.stats.stockArea} secondaryText="Stock Area" />
               <ListItem primaryText={this.state.stats.waste} secondaryText="Left Over area" />
             </List>
@@ -134,11 +137,13 @@ const Export = React.createClass({
     })
 
     stats.waste = stats.stockArea - stats.areaUsed;
+    stats.compCount = this.state.components.length;
+    stats.stockCount = this.state.stock.length;
+
+    this.props.save(this.state.stock, this.state.components);
 
     this.setState({
       stats: stats
-    }, function () {
-      console.log(this.state.stats);
     })
   }
 });

@@ -34,7 +34,7 @@ html, body {
   max-width: 960px;
   height: 800px;
   margin: 20px auto;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 
 .canvas {

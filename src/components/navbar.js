@@ -20,7 +20,12 @@ const NavBar = React.createClass({
         style={this.props.style.navstyle}
         titleStyle={this.props.style.titlestyle}
         showMenuIconButton={false}
-        iconElementRight={<Link to="/"><RaisedButton label="Home"/></Link>}
+        iconElementRight={
+          <div>
+            <Link to="/"><RaisedButton label="Home"/></Link>
+            <RaisedButton label="Save Project" onClick={this.props.save}/>
+          </div>
+        }
       />
     )
   },

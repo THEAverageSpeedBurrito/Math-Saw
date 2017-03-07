@@ -95,6 +95,7 @@ var Editor = React.createClass({
           components={this.state.components}
           stock={this.state.stock}
           cutWidth={this.state.cutWidth}
+          save={this.setData}
         />)
     }else{
       render = (
@@ -121,7 +122,7 @@ var Editor = React.createClass({
 
     return (
       <main>
-        <NavBar style={this.state.style}/>
+        <NavBar style={this.state.style} save={this.saveProject}/>
         <Container className="container" id="mainContainer">
           <div>
             <Dialog
@@ -331,6 +332,7 @@ var Editor = React.createClass({
       editing.name = this.state.editing.name;
       editing.length = this.state.editing.length;
       editing.width = this.state.editing.width;
+      editing.area = editing.width * editing.length;
 
       tempComps[index] = editing;
 
@@ -390,8 +392,19 @@ var Editor = React.createClass({
         width: event.target.value,
       }
     })
-  }
+  },
 
+  saveProject() {
+    //make database post request here
+    console.log(this.state.stock, this.state.components);
+  },
+
+  setData(stock, components) {
+    this.setState({
+      stock: stock,
+      components: components
+    });
+  }
 })
 
 export default Editor;
