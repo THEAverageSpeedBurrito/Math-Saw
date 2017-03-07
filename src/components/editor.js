@@ -6,7 +6,6 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import Checkbox from 'material-ui/Checkbox';
-import Divider from 'material-ui/Divider';
 
 //Components
 import NavBar from './navbar';
@@ -55,16 +54,16 @@ var Editor = React.createClass({
         // new Component(4, 48, 0, 0, 'name'),
         // new Component(2, 48, 0, 0, 'name'),
         // new Component(2, 48, 0, 0, 'name'),
-        new Component(4,1, 0, 0, 'name'),
-        new Component(8,4, 0, 0, 'name'),
-        new Component(3,2, 0, 0, 'name')
+        new Component(4,1, 0, 0, 'Comp 1'),
+        new Component(8,4, 0, 0, 'Leg'),
+        new Component(3,2, 0, 0, 'Something')
       ],
       length: '',
       width: '',
       name: '',
       export: false,
       style: style,
-      open: true,
+      open: false,
       cutWidth: .125,
       projectName: '',
     })
@@ -234,7 +233,6 @@ var Editor = React.createClass({
       width: '',
       name: '',
     })
-    console.log(this.state.components);
   },
 
   //take array of object classes

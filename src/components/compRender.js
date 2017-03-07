@@ -7,40 +7,50 @@ const CompRender = React.createClass({
   getInitialState() {
     var rotationY = Math.floor(Math.random(10)*10)
     return ({
-      cubeRotation: new THREE.Euler(0, rotationY, 0)
+      cubeRotation: new THREE.Euler(0, rotationY, 0),
+      fullHeight: 200,
+      fullWidth: 0,
     })
   },
 
   onAnimate() {
     this.setState({
       cubeRotation: new THREE.Euler(
-        0,
+        .01,
         this.state.cubeRotation.y + 0.005,
         0
       ),
     });
   },
 
+  componentDidMount() {
+    var container = document.getElementById(this.props.container)
+    var height = container.offsetHeight;
+    var width = container.offsetWidth;
+
+    this.setState({
+      fullWidth: width
+    })
+  },
+
   render() {
-    const width = 200; // canvas width
-    const height = 179; // canvas height
+
     const cameraPosition = new THREE.Vector3(0, 0, 5);
 
 
     return (<React3
       mainCamera="camera"
-      width={width}
-      height={height}
+      width={this.state.fullWidth}
+      height={this.state.fullHeight}
       antialias={true}
-      clearColor={0xffffff}
-
+      clearColor={0x000000}
       onAnimate={this.onAnimate}
-    >
+      >
       <scene>
         <perspectiveCamera
           name="camera"
           fov={70}
-          aspect={width/height}
+          aspect={this.state.fullWidth/this.state.fullHeight}
           near={0.1}
           far={1000}
           position={cameraPosition}

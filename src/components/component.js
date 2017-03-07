@@ -5,6 +5,8 @@ import CompRender from './compRender';
 import {List, ListItem} from 'material-ui/List';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
+
 
 var style = {
   paper: {
@@ -40,37 +42,29 @@ const Comp = React.createClass({
     })
   },
 
-  componentWillMount() {
-
-  },
-
   render() {
+    var comp = this.state.comp;
+    var key = comp.name.replace(' ', '');
     return (
-        <Row>
-          <Col sm={6} md={2}>
-              <Paper style={style.paper} zDepth={0}>
-                <List style={style.list}>
-                  <ListItem primaryText={this.state.comp.length} secondaryText="Length" innerDivStyle={style.innerList}/>
-                  <ListItem primaryText={this.state.comp.width} secondaryText="Width" innerDivStyle={style.innerList}/>
-                  <ListItem primaryText={this.state.comp.length} secondaryText="Depth" innerDivStyle={style.innerList}/>
-                </List>
-              </Paper>
-            </Col>
-            <Col sm={6} md={3}>
-              <Paper style={style.paper}>
-                <List style={style.list}>
-                  <ListItem primaryText="Component" secondaryText="Name" innerDivStyle={style.innerList}/>
-                  <ListItem primaryText="Delete" innerDivStyle={style.innerList}/>
-                  <ListItem primaryText="Edit" innerDivStyle={style.innerList}/>
-                </List>
-              </Paper>
-            </Col>
-            <Col sm={12} md={7}>
-              <Paper style={style.paper}>
-                  <CompRender length={this.state.comp.length} width={this.state.comp.width}/>
-              </Paper>
-            </Col>
-        </Row>
+        <Col sm={12} md={6} lg={4} key={key}>
+          <Card style={style.card}>
+            <CardMedia id={key}>
+              <CompRender length={this.state.comp.length} width={this.state.comp.width} container={key}/>
+            </CardMedia>
+            <Divider/>
+            <CardTitle title={comp.name} />
+            <CardText>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
+              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+            </CardText>
+            <CardActions>
+              <RaisedButton label="Edit"/>
+              <RaisedButton label="Delete"/>
+            </CardActions>
+          </Card>
+        </Col>
     )
   }
 });
