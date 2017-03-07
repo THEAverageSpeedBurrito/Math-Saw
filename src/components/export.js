@@ -86,7 +86,7 @@ const Export = React.createClass({
           </Table>
         </div>
         <div id="canvasContainer">
-          <canvas id="cutRender" className='canvas'>
+          <canvas id="cutRender">
             Your browser does not support the HTML5 canvas tag.
           </canvas>
         </div>

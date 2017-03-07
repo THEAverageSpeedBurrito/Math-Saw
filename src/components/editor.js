@@ -46,17 +46,15 @@ var style = {
   }
 }
 
+var editing, index;
+
 var Editor = React.createClass({
   getInitialState: function () {
     return ({
       stock: [],
       components: [
-        // new Component(4, 48, 0, 0, 'name'),
-        // new Component(2, 48, 0, 0, 'name'),
-        // new Component(2, 48, 0, 0, 'name'),
-        // new Component(4,1, 0, 0, 'Comp 1'),
-        // new Component(8,4, 0, 0, 'Leg', 0),
-        // new Component(3,2, 0, 0, 'Something')
+        new Component(12, 2, 0, 0, 'myComp', 0),
+        new Component(6, 4, 0, 0, 'myComp2', 1)
       ],
       length: '',
       width: '',
@@ -66,16 +64,27 @@ var Editor = React.createClass({
       open: false,
       cutWidth: .125,
       projectName: '',
+      editing: {
+        open: false,
+        name: '',
+        length: '',
+        width: ''
+      }
     })
   },
 
   render: function() {
-    const actions = [
+    const initialActions = [
       <RaisedButton
         label="Create Project"
-        primary={true}
         onClick={this.handleModal}
       />
+    ];
+    const editActions = [
+        <RaisedButton
+          label="Save Component"
+          onClick={this.handleEdit}
+        />
     ];
 
     var which;
@@ -94,7 +103,7 @@ var Editor = React.createClass({
             {
               this.state.components.map((component) => {
                 return (
-                  <Comp component={component} delete={this.handleDeletion}/>
+                  <Comp component={component} delete={this.handleDeletion} edit={this.handleEdit} key={component.name}/>
                 )
               })
             }
@@ -115,10 +124,9 @@ var Editor = React.createClass({
         <NavBar style={this.state.style}/>
         <Container className="container" id="mainContainer">
           <div>
-            <RaisedButton label="Dialog" onClick={this.handleModal} />
             <Dialog
               title="Project Information"
-              actions={actions}
+              actions={initialActions}
               modal={false}
               open={this.state.open}
               onRequestClose={this.handleModal}
@@ -139,33 +147,64 @@ var Editor = React.createClass({
                 />
               </Col>
             </Row>
-              <p>Avaiable types of stock</p>
-              <Row>
-                <Col sm={3}>
-                  <Checkbox
-                    label="2x4 8'"
-                    onCheck={() => this.addStock(new Stock(96, 4))}
-                  />
-                </Col>
-                <Col sm={3}>
-                  <Checkbox
-                    label="2x4 10'"
-                    onCheck={() => this.addStock(new Stock(120, 4))}
-                  />
-                </Col>
-                <Col sm={3}>
-                  <Checkbox
-                    label="2x6 8'"
-                    onCheck={() => this.addStock(new Stock(96, 6))}
-                  />
-                </Col>
-                <Col sm={3}>
-                  <Checkbox
-                    label="2x6 10'"
-                    onCheck={() => this.addStock(new Stock(120, 6))}
-                  />
-                </Col>
-              </Row>
+            <p>Avaiable types of stock</p>
+            <Row>
+              <Col sm={3}>
+                <Checkbox
+                  label="2x4 8'"
+                  onCheck={() => this.addStock(new Stock(96, 4))}
+                />
+              </Col>
+              <Col sm={3}>
+                <Checkbox
+                  label="2x4 10'"
+                  onCheck={() => this.addStock(new Stock(120, 4))}
+                />
+              </Col>
+              <Col sm={3}>
+                <Checkbox
+                  label="2x6 8'"
+                  onCheck={() => this.addStock(new Stock(96, 6))}
+                />
+              </Col>
+              <Col sm={3}>
+                <Checkbox
+                  label="2x6 10'"
+                  onCheck={() => this.addStock(new Stock(120, 6))}
+                />
+              </Col>
+            </Row>
+            </Dialog>
+            <Dialog
+              title={this.state.editing.name}
+              actions={editActions}
+              modal={false}
+              open={this.state.editing.open}
+              onRequestClose={this.handleEdit}
+            >
+            <Row>
+              <Col sm={12}>
+                <TextField
+                floatingLabelText="Name"
+                value={this.state.editing.name}
+                onChange={this.changeName}
+                />
+              </Col>
+              <Col sm={12} md={6}>
+                <TextField
+                floatingLabelText="Length"
+                value={this.state.editing.length}
+                onChange={this.changeLength}
+                />
+              </Col>
+              <Col sm={12} md={6}>
+                <TextField
+                floatingLabelText="Width"
+                value={this.state.editing.width}
+                onChange={this.changeWidth}
+                />
+              </Col>
+            </Row>
             </Dialog>
           </div>
           <div className="center">
@@ -283,8 +322,74 @@ var Editor = React.createClass({
     this.setState({
       components: newComponentsList
     })
+  },
 
-    console.log(newComponentsList);
+  handleEdit(id) {
+
+    if(this.state.editing.open){
+      var tempComps = this.state.components;
+      editing.name = this.state.editing.name;
+      editing.length = this.state.editing.length;
+      editing.width = this.state.editing.width;
+
+      tempComps[index] = editing;
+
+      this.setState({
+        components: tempComps,
+        editing: {
+          open: false,
+          name: '',
+          length: '',
+          width: '',
+        }
+      })
+    }else{
+      editing = this.state.components.filter((comp) => {
+        return comp.id === id;
+      })[0];
+
+      index = this.state.components.indexOf(editing);
+
+      this.setState({
+        editing: {
+          open: true,
+          name: editing.name,
+          length: editing.length,
+          width: editing.width
+        }
+      });
+    }
+  },
+
+  changeName(event) {
+    this.setState({
+      editing: {
+        open: true,
+        name: event.target.value,
+        length: this.state.editing.length,
+        width: this.state.editing.width,
+      }
+    })
+  },
+  changeLength(event) {
+    this.setState({
+      editing: {
+        open: true,
+        name: this.state.editing.name,
+        length: event.target.value,
+        width: this.state.editing.width,
+      }
+    })
+  },
+  changeWidth(event) {
+    this.setState({
+      editing: {
+        open: true,
+        name: this.state.editing.name,
+        length: this.state.editing.length,
+        width: event.target.value,
+      }
+    })
   }
 
 })

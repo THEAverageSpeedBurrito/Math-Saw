@@ -1,6 +1,6 @@
 //constructors
 function Component (length, width, x, y, name, id) {
-  id = id || 0;
+  this.id = id || 0;
   this.name = name;
   this.x = x || 0;
   this.y = y || 0;

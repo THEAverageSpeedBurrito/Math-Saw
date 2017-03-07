@@ -58,7 +58,7 @@ const Comp = React.createClass({
               Measurement data goes here
             </CardText>
             <CardActions>
-              <RaisedButton label="Edit"/>
+              <RaisedButton label="Edit" onClick={() => this.editComponent(comp.id)}/>
               <RaisedButton label="Delete" onClick={() => this.deleteComponent(comp.id)}/>
             </CardActions>
           </Card>
@@ -66,9 +66,12 @@ const Comp = React.createClass({
     )
   },
 
-  deleteComponent(id){
-    console.log(id);
+  deleteComponent(id) {
     this.props.delete(id)
+  },
+
+  editComponent(id) {
+    this.props.edit(id)
   }
 });
 
