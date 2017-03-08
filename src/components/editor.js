@@ -79,7 +79,6 @@ var Editor = React.createClass({
 
     if(this.state.projectCode){
       sessionStorage.removeItem('projectCode');
-      console.log('loading component');
 
       request
       .get(`https://math-saw-db.herokuapp.com/project/${this.state.projectCode}`)
@@ -87,8 +86,11 @@ var Editor = React.createClass({
         console.log('what');
         if(res.text){
           project = JSON.parse(res.text);
-          console.log(project);
           components = project.components
+
+          components.forEach((comp) => {
+            comp.area = comp.length * comp.width
+          })
 
           this.setState({
             open: false,
@@ -313,14 +315,19 @@ var Editor = React.createClass({
     var {length, width, name} = this.state;
     var id = this.state.components.length;
 
-    this.state.components.push(new Component(parseInt(length), parseInt(width), 0, 0, name, id))
-    this.state.components[this.state.components.length - 1].id = this.state.components.length - 1
+    if(!isNaN(length) && !isNaN(width)){
+      this.state.components.push(new Component(parseInt(length), parseInt(width), 0, 0, name, id))
+      this.state.components[this.state.components.length - 1].id = this.state.components.length - 1
 
-    this.setState({
-      length: '',
-      width: '',
-      name: '',
-    });
+      this.setState({
+        length: '',
+        width: '',
+        name: '',
+      });
+    }else{
+      alert('invalid input')
+    }
+
   },
 
   //take array of object classes
@@ -336,19 +343,22 @@ var Editor = React.createClass({
   },
 
   handleModal() {
-    this.setState({
-      open: !this.state.open
-    })
+    if(this.state.projectName && !isNaN(this.state.cutWidth)){
+      this.setState({
+        open: !this.state.open
+      })
+    }
   },
 
   changeCutWidth(event) {
-    let newWidth = parseInt(event.target.value);
+    let newWidth = event.target.value;
     this.setState({
       cutWidth: newWidth
     });
   },
 
   projectName(event) {
+
     let newName = event.target.value;
     this.setState({
       projectName: newName
