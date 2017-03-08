@@ -20,8 +20,10 @@ var style = {
   },
   upper: {
     backgroundColor: '#353531',
+    borderTop: '5px solid dodgerblue',
+    borderBottom: '5px solid dodgerblue',
     color: 'white',
-    paddingTop: window.innerHeight/4 - 100
+    paddingTop: window.innerHeight/4 - 115
   },
   lower: {
     height: 100,
@@ -56,7 +58,7 @@ const Landing = React.createClass({
   render: function() {
     return (
       <div>
-        <div style={this.state.style.upper}>
+        <div style={this.state.style.upper} className="landingMain">
           <div className="container center">
             <Row>
               <Col sm={12} className="border">
@@ -69,7 +71,7 @@ const Landing = React.createClass({
                 <h1>Saw</h1>
               </Col>
             </Row>
-            <Link to="/editor">Editor</Link>
+            <Link to="/editor"><RaisedButton label="New Project"/></Link>
           </div>
         </div>
         <div style={this.state.style.lower} className="center">

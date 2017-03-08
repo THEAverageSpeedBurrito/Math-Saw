@@ -41,6 +41,17 @@ var style = {
     bottom: '20px',
     right: '20px',
     backgroundColor: "slategray"
+  },
+  dialoge: {
+    body: {
+      borderLeft: '3px solid dodgerblue',
+      backgroundColor: '#51514F'
+    },
+    actions: {
+      borderLeft: '3px solid dodgerblue',
+      backgroundColor: '#353531',
+    }
+
   }
 }
 
@@ -159,13 +170,17 @@ var Editor = React.createClass({
         <Container className="container" id="mainContainer">
           <div>
             <Dialog
-              title="Project Information"
               actions={initialActions}
               modal={false}
               open={this.state.open}
               onRequestClose={this.handleModal}
+              bodyStyle={this.state.style.dialoge.body}
+              actionsContainerStyle={this.state.style.dialoge.actions}
             >
             <Row>
+              <Col sm={12}>
+                <h3>Project information</h3>
+              </Col>
               <Col sm={12} md={6}>
                 <TextField
                 floatingLabelText="Project Name"
