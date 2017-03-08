@@ -63,6 +63,7 @@ const Landing = React.createClass({
             <img src={logo} style={this.state.style.logo} alt="Circular saw"/>
           </div>
           <div style={this.state.style.lower}/>
+          <Link to="/editor">Editor</Link>
         </div>
       </div>
     )
