@@ -445,10 +445,11 @@ var Editor = React.createClass({
           .post("https://math-saw-db.herokuapp.com/project")
           .send({
             name: this.state.projectName,
-            code: this.state.code
+            code: this.state.projectCode
           })
           .then((res) => {
             this.state.components.forEach((comp) => {
+              console.log('posting component');
               request
               .post(`https://math-saw-db.herokuapp.com/component`)
               .send({
@@ -456,8 +457,10 @@ var Editor = React.createClass({
                 name: comp.name,
                 length: comp.length,
                 width: comp.width
+              }).
+              then((res) => {
+                console.log(res);
               })
-
             })
           });
         })
