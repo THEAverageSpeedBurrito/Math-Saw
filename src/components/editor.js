@@ -70,7 +70,6 @@ var Editor = React.createClass({
         width: ''
       },
       saving: false,
-      code: null
     })
   },
 
@@ -80,15 +79,20 @@ var Editor = React.createClass({
 
     if(this.state.projectCode){
       sessionStorage.removeItem('projectCode');
+      console.log('loading component');
 
       request
       .get(`https://math-saw-db.herokuapp.com/project/${this.state.projectCode}`)
       .then((res) => {
+        console.log('what');
         if(res.text){
           project = JSON.parse(res.text);
+          console.log(project);
           components = project.components
 
           this.setState({
+            open: false,
+            projectName: project.name,
             components: components
           })
         }
@@ -234,7 +238,7 @@ var Editor = React.createClass({
               onRequestClose={this.saveProject}
             >
             <div className="center">
-              <h3>{this.state.code}</h3>
+              <h3>{this.state.projectCode}</h3>
             </div>
             </Dialog>
           </div>
@@ -430,9 +434,9 @@ var Editor = React.createClass({
     });
 
     if(!this.state.saving){
-      if(!this.state.code){
+      if(!this.state.projectCode){
         this.setState({
-          code: randomstring.generate({
+          projectCode: randomstring.generate({
             length: 20,
             capitalization: 'uppercase'
           })
