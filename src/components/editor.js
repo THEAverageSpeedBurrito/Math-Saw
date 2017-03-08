@@ -47,13 +47,14 @@ var style = {
 var editing, index;
 
 var Editor = React.createClass({
+
   getInitialState: function () {
+    var projectCode = sessionStorage.getItem('projectCode');
+
     return ({
+      projectCode: projectCode || null,
       stock: [],
-      components: [
-        new Component(12, 2, 0, 0, 'myComp', 0),
-        new Component(6, 4, 0, 0, 'myComp2', 1)
-      ],
+      components: [],
       length: '',
       width: '',
       name: '',
@@ -73,7 +74,31 @@ var Editor = React.createClass({
     })
   },
 
+  componentDidMount () {
+    var project;
+    var components = [];
+
+    if(this.state.projectCode){
+      sessionStorage.removeItem('projectCode');
+
+      request
+      .get(`https://math-saw-db.herokuapp.com/project/${this.state.projectCode}`)
+      .then((res) => {
+        if(res.text){
+          project = JSON.parse(res.text);
+          components = project.components
+
+          this.setState({
+            components: components
+          })
+        }
+      });
+
+    }
+  },
+
   render: function() {
+
     const initialActions = [
       <RaisedButton
         label="Create Project"
@@ -419,7 +444,17 @@ var Editor = React.createClass({
             code: this.state.code
           })
           .then((res) => {
-            console.log(res);
+            this.state.components.forEach((comp) => {
+              request
+              .post(`https://math-saw-db.herokuapp.com/component`)
+              .send({
+                project: res.body[0].id,
+                name: comp.name,
+                length: comp.length,
+                width: comp.width
+              })
+
+            })
           });
         })
       }
