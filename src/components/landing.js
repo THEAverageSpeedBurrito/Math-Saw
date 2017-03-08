@@ -20,7 +20,8 @@ var style = {
   },
   upper: {
     backgroundColor: '#353531',
-    color: 'white'
+    color: 'white',
+    paddingTop: window.innerHeight/4 - 100
   },
   lower: {
     height: 100,
@@ -28,10 +29,6 @@ var style = {
     position: 'absolute',
     backgroundColor: '#0365B5',
     paddingTop: 15
-  },
-  logo: {
-    height: 500,
-    width: 500,
   },
   code: {
     width: 225
@@ -61,7 +58,17 @@ const Landing = React.createClass({
       <div>
         <div style={this.state.style.upper}>
           <div className="container center">
-            <img src={logo} style={this.state.style.logo} alt="Circular saw"/>
+            <Row>
+              <Col sm={12} className="border">
+                <h1>Math</h1>
+              </Col>
+              <Col sm={12} className="border">
+                <img src={logo} className="landingLogo" alt="Circular saw"/>
+              </Col>
+              <Col sm={12} className="border">
+                <h1>Saw</h1>
+              </Col>
+            </Row>
             <Link to="/editor">Editor</Link>
           </div>
         </div>

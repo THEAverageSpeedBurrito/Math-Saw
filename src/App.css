@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=VT323');
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One');
+
 
 html, body {
   width: 100%;
@@ -9,6 +11,15 @@ html, body {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Rubik Mono One', sans-serif;
+  font-size: 50px;
+  margin: 5px;
+  color: rgb(216, 215, 218);
+  text-shadow: 0 0 5px black;
+  letter-spacing: 3px
 }
 
 input[type=text] {
@@ -48,4 +59,19 @@ input[type=text] {
 
 .canvas {
   border: 1px solid black;
+}
+
+/*Landing Page Styles*/
+
+.landingLogo {
+  width: 100% inherit;
+  height: auto;
+}
+
+.landingTitle {
+
+}
+
+.border {
+  /*border: 1px solid black;*/
 }
