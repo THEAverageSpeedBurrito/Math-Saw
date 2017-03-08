@@ -140,8 +140,6 @@ const Export = React.createClass({
     stats.compCount = this.state.components.length;
     stats.stockCount = this.state.stock.length;
 
-    this.props.save(this.state.stock, this.state.components);
-
     this.setState({
       stats: stats
     })

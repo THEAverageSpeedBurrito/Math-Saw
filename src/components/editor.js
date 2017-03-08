@@ -1,5 +1,7 @@
 import React from 'react';
 var {Component, Stock} = require('./js/constructors');
+var randomstring = require('randomstring');
+import request from 'superagent';
 import { Container, Row, Col} from 'react-grid-system';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
@@ -61,7 +63,7 @@ var Editor = React.createClass({
       name: '',
       export: false,
       style: style,
-      open: false,
+      open: true,
       cutWidth: .125,
       projectName: '',
       editing: {
@@ -69,7 +71,9 @@ var Editor = React.createClass({
         name: '',
         length: '',
         width: ''
-      }
+      },
+      saving: false,
+      code: null
     })
   },
 
@@ -95,7 +99,6 @@ var Editor = React.createClass({
           components={this.state.components}
           stock={this.state.stock}
           cutWidth={this.state.cutWidth}
-          save={this.setData}
         />)
     }else{
       render = (
@@ -206,6 +209,16 @@ var Editor = React.createClass({
                 />
               </Col>
             </Row>
+            </Dialog>
+            <Dialog
+              actions={<RaisedButton label="close" onClick={this.saveProject}/>}
+              modal={false}
+              open={this.state.saving}
+              onRequestClose={this.saveProject}
+            >
+            <div className="center">
+              <h3>{this.state.code}</h3>
+            </div>
             </Dialog>
           </div>
           <div className="center">
@@ -395,15 +408,27 @@ var Editor = React.createClass({
   },
 
   saveProject() {
-    //make database post request here
-    console.log(this.state.stock, this.state.components);
-  },
-
-  setData(stock, components) {
     this.setState({
-      stock: stock,
-      components: components
+      saving: !this.state.saving,
     });
+
+    if(!this.state.saving){
+      if(!this.state.code){
+        this.setState({
+          code: randomstring.generate(20)
+        },function () {
+          request
+          .post("https://math-saw-db.herokuapp.com/project")
+          .send({
+            name: this.state.projectName,
+            code: this.state.code
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        })
+      }
+    }
   }
 })
 
