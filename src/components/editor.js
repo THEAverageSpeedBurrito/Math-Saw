@@ -60,7 +60,7 @@ var Editor = React.createClass({
       name: '',
       export: false,
       style: style,
-      open: true,
+      open: false,
       cutWidth: .125,
       projectName: '',
       editing: {
@@ -97,7 +97,10 @@ var Editor = React.createClass({
           })
         }
       });
-
+    }else{
+      this.setState({
+        open: true
+      })
     }
   },
 
@@ -296,6 +299,18 @@ var Editor = React.createClass({
 
   addComponent: function (event) {
     event.preventDefault()
+
+    if(this.state.projectCode){
+      request
+      .delete(`https://math-saw-db.herokuapp.com/project/${this.state.projectCode}`)
+      .then(() => {
+        this.setState({
+          projectCode: null
+        }, function () {
+          console.log(this.state.projectCode);
+        });
+      })
+    }
 
     var {length, width, name} = this.state;
     var id = this.state.components.length;
