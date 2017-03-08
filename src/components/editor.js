@@ -306,8 +306,6 @@ var Editor = React.createClass({
       .then(() => {
         this.setState({
           projectCode: null
-        }, function () {
-          console.log(this.state.projectCode);
         });
       })
     }
@@ -368,6 +366,16 @@ var Editor = React.createClass({
     var newComponentsList = this.state.components.filter((comp) => {
       return (comp.id !== id)
     });
+
+    if(this.state.projectCode){
+      request
+      .delete(`https://math-saw-db.herokuapp.com/project/${this.state.projectCode}`)
+      .then(() => {
+        this.setState({
+          projectCode: null
+        });
+      })
+    }
 
     this.setState({
       components: newComponentsList
