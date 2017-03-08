@@ -31,10 +31,6 @@ var style = {
     height: 500,
     width: 500,
   },
-  input: {
-    margin: 10,
-    width: 200
-  },
   paper: {
     padding: 10,
     margin: '20px 0 20px 0',
@@ -156,25 +152,21 @@ var Editor = React.createClass({
               <Col sm={3}>
                 <Checkbox
                   label="2x4 8'"
-                  onCheck={() => this.addStock(new Stock(96, 4))}
                 />
               </Col>
               <Col sm={3}>
                 <Checkbox
                   label="2x4 10'"
-                  onCheck={() => this.addStock(new Stock(120, 4))}
                 />
               </Col>
               <Col sm={3}>
                 <Checkbox
                   label="2x6 8'"
-                  onCheck={() => this.addStock(new Stock(96, 6))}
                 />
               </Col>
               <Col sm={3}>
                 <Checkbox
                   label="2x6 10'"
-                  onCheck={() => this.addStock(new Stock(120, 6))}
                 />
               </Col>
             </Row>
@@ -229,21 +221,21 @@ var Editor = React.createClass({
               <Col sm={12}>
                 <input
                 placeholder="Name"
+                type="text"
                 onChange={this.componentName}
                 value={this.state.name}
-                style={style.input}
                 />
                 <input
-                style={style.input}
                 placeholder="Length"
+                type="text"
                 onChange={this.setLength}
                 value={this.state.length}
                 />
                 <input
                 placeholder="Width"
+                type="text"
                 onChange={this.setWidth}
                 value={this.state.width}
-                style={style.input}
                 />
               </Col>
               <Col sm={12}>
@@ -415,7 +407,10 @@ var Editor = React.createClass({
     if(!this.state.saving){
       if(!this.state.code){
         this.setState({
-          code: randomstring.generate(20)
+          code: randomstring.generate({
+            length: 20,
+            capitalization: 'uppercase'
+          })
         },function () {
           request
           .post("https://math-saw-db.herokuapp.com/project")

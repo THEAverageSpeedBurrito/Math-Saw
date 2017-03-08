@@ -26,13 +26,15 @@ var style = {
     height: 100,
     width: 100,
     position: 'absolute',
-    top: 200,
     backgroundColor: '#0365B5',
-    zIndex: '-1'
+    paddingTop: 15
   },
   logo: {
     height: 500,
     width: 500,
+  },
+  code: {
+    width: 225
   }
 }
 
@@ -42,12 +44,11 @@ const Landing = React.createClass({
     var width = window.innerWidth;
     style.upper.height = height;
     style.upper.width = width;
-    style.lower.height = height;
     style.lower.width = width;
 
     return ({
       style: style,
-      title: '',
+      projectCode: ''
     })
   },
 
@@ -61,9 +62,12 @@ const Landing = React.createClass({
         <div style={this.state.style.upper}>
           <div className="container center">
             <img src={logo} style={this.state.style.logo} alt="Circular saw"/>
+            <Link to="/editor">Editor</Link>
           </div>
-          <div style={this.state.style.lower}/>
-          <Link to="/editor">Editor</Link>
+        </div>
+        <div style={this.state.style.lower} className="center">
+          <input type="text" style={style.code} value={this.state.projectCode} onChange={this.getProjectCode}/>
+          <Link to='/editor'><RaisedButton label="Load" onClick={this.loadProject}/></Link>
         </div>
       </div>
     )
@@ -74,12 +78,26 @@ const Landing = React.createClass({
     var width = window.innerWidth;
     style.upper.height = height;
     style.upper.width = width;
-    style.lower.height = height;
     style.lower.width = width;
 
     this.setState({
       style: style
     })
+  },
+
+  getProjectCode(event){
+    var code = event.target.value;
+    this.setState({
+      projectCode: code
+    })
+  },
+
+  loadProject() {
+    if(this.state.projectCode.length === 20){
+      sessionStorage.setItem('projectCode', this.state.projectCode);
+    }else{
+      alert('invalid code');
+    }
   }
 });
 
