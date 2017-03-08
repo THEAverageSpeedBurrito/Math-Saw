@@ -221,11 +221,12 @@ var Editor = React.createClass({
             </Row>
             </Dialog>
             <Dialog
-              title={this.state.editing.name}
               actions={editActions}
               modal={false}
               open={this.state.editing.open}
               onRequestClose={this.handleEdit}
+              bodyStyle={this.state.style.dialoge.body}
+              actionsContainerStyle={this.state.style.dialoge.actions}
             >
             <Row>
               <Col sm={12}>
@@ -256,9 +257,13 @@ var Editor = React.createClass({
               modal={false}
               open={this.state.saving}
               onRequestClose={this.saveProject}
+              bodyStyle={this.state.style.dialoge.body}
+              actionsContainerStyle={this.state.style.dialoge.actions}
             >
             <div className="center">
+              <div>
               <h3>{this.state.projectCode}</h3>
+              </div>
             </div>
             </Dialog>
           </div>
