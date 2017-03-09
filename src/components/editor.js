@@ -74,6 +74,9 @@ var style = {
     border: '1px solid #2C2C29',
     textAlign: 'center',
     padding: 25
+  },
+  label: {
+    margin: 10
   }
 }
 
@@ -273,22 +276,28 @@ var Editor = React.createClass({
             >
             <Row>
               <Col sm={12}>
-                <TextField
-                floatingLabelText="Name"
+                <label for="editName" style={style.label}>Project</label>
+                <input
+                type="text"
+                id="editName"
                 value={this.state.editing.name}
                 onChange={this.changeName}
                 />
               </Col>
               <Col sm={12} md={6}>
-                <TextField
-                floatingLabelText="Length"
+                <label for="editLength" style={style.label}>Length</label>
+                <input
+                type="text"
+                id="editLength"
                 value={this.state.editing.length}
                 onChange={this.changeLength}
                 />
               </Col>
               <Col sm={12} md={6}>
-                <TextField
-                floatingLabelText="Width"
+                <label for="editWidth" style={style.label}>Width</label>
+                <input
+                type="text"
+                id="editWidth"
                 value={this.state.editing.width}
                 onChange={this.changeWidth}
                 />

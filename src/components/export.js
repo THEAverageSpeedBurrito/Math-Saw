@@ -73,7 +73,7 @@ const Export = React.createClass({
           name.textContent = comp.name
           area.textContent = comp.area + 'in^2'
         }else{
-          canvas.fillStyle = 'white'
+          canvas.fillStyle = '#3DE292'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
           canvas.stroke();
         }
