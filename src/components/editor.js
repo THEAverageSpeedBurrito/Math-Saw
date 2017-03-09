@@ -20,17 +20,17 @@ var style = {
     color: "#114B5F",
     position: 'fixed',
     top: '0',
-    boxShadow: 'none',
     boxShadow: '0 2px 10px 1px rgba(0,0,0,0.4)',
     opactiy: '0.8',
     button: {
-
-    }
+      margin: '5px 10px 5px 10px',
+    },
   },
   titlestyle: {
     color: 'white',
-    fontFamily: 'Rubik Mono One',
-    fontSize: 30
+    fontFamily: 'Jaldi',
+    fontSize: 40,
+    textShadow: 'none'
   },
   logo: {
     height: 500,

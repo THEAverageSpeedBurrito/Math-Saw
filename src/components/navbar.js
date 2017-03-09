@@ -22,8 +22,8 @@ const NavBar = React.createClass({
         showMenuIconButton={false}
         iconElementRight={
           <div>
-            <Link to="/"><RaisedButton label="Home"/></Link>
-            <RaisedButton label="Save Project" onClick={this.props.save}/>
+            <Link to="/"><RaisedButton label="Home" style={this.props.style.navstyle.button}/></Link>
+            <RaisedButton label="Save Project" onClick={this.props.save} style={this.props.style.navstyle.button}/>
           </div>
         }
       />
