@@ -22,7 +22,10 @@ var style = {
     top: '0',
     boxShadow: 'none',
     boxShadow: '0 2px 10px 1px rgba(0,0,0,0.4)',
-    opactiy: '0.8'
+    opactiy: '0.8',
+    button: {
+
+    }
   },
   titlestyle: {
     color: 'white',
@@ -45,7 +48,10 @@ var style = {
     position: 'fixed',
     bottom: '20px',
     right: '20px',
-    backgroundColor: "slategray"
+  },
+  buttonBlueOverlay: {
+    backgroundColor: "white",
+    borderBottom: '3px solid #3DE292',
   },
   dialoge: {
     body: {
@@ -139,12 +145,14 @@ var Editor = React.createClass({
       <RaisedButton
         label="Create Project"
         onClick={this.handleModal}
+        overlayStyle={style.buttonBlueOverlay}
       />
     ];
     const editActions = [
         <RaisedButton
           label="Save Component"
           onClick={this.handleEdit}
+          overlayStyle={style.buttonBlueOverlay}
         />
     ];
 
@@ -214,6 +222,8 @@ var Editor = React.createClass({
                 <RaisedButton
                 label="Add Component"
                 onClick={this.addComponent}
+                overlayStyle={style.buttonBlueOverlay}
+                fullWidth={true}
                 />
               </Col>
             </Row>
@@ -234,40 +244,21 @@ var Editor = React.createClass({
                 <h3>Project information</h3>
               </Col>
               <Col sm={12} md={6}>
-                <TextField
-                floatingLabelText="Project Name"
+                <input
+                type="text"
+                className="modal-input"
+                placeholder="Project Name"
                 value={this.state.projectName}
                 onChange={this.projectName}
                 />
               </Col>
               <Col sm={12} md={6}>
-                <TextField
-                floatingLabelText="Cut Width"
+                <input
+                type="text"
+                className="modal-input"
+                placeholder="Blade Width"
                 value={this.state.cutWidth}
                 onChange={this.changeCutWidth}
-                />
-              </Col>
-            </Row>
-            <p>Avaiable types of stock</p>
-            <Row>
-              <Col sm={3}>
-                <Checkbox
-                  label="2x4 8'"
-                />
-              </Col>
-              <Col sm={3}>
-                <Checkbox
-                  label="2x4 10'"
-                />
-              </Col>
-              <Col sm={3}>
-                <Checkbox
-                  label="2x6 8'"
-                />
-              </Col>
-              <Col sm={3}>
-                <Checkbox
-                  label="2x6 10'"
                 />
               </Col>
             </Row>
@@ -305,7 +296,7 @@ var Editor = React.createClass({
             </Row>
             </Dialog>
             <Dialog
-              actions={<RaisedButton label="close" onClick={this.saveProject}/>}
+              actions={<RaisedButton label="close" onClick={this.saveProject} overlayStyle={style.buttonBlueOverlay}/>}
               modal={false}
               open={this.state.saving}
               onRequestClose={this.saveProject}
@@ -326,7 +317,7 @@ var Editor = React.createClass({
           {render}
 
         </Container>
-        <RaisedButton label={expLabel} style={style.expButton} onClick={this.renderCuts} />
+        <RaisedButton label={expLabel} style={style.expButton} overlayStyle={style.buttonBlueOverlay} onClick={this.renderCuts} />
       </main>
     )
   },

@@ -43,8 +43,7 @@ const CompRender = React.createClass({
       width={this.state.fullWidth}
       height={this.state.fullHeight}
       antialias={true}
-      alpha={true}
-      clearColor={0x000000, 0}
+      clearColor={0x353531}
       onAnimate={this.onAnimate}
       >
       <scene>
@@ -70,7 +69,7 @@ const CompRender = React.createClass({
           <boxGeometry
             width={this.props.width/2}
             height={this.props.length/2}
-            depth={1}
+            depth={0.75/2}
           />
           <meshLambertMaterial color={0x1E90FF}/>
         </mesh>

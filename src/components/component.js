@@ -6,6 +6,7 @@ import {List, ListItem} from 'material-ui/List';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 
 var style = {
@@ -30,8 +31,19 @@ var style = {
     padding: '10px 10px 10px 50px',
     margin: '10px 0 10px 0'
   },
-  iconStyle: {
-    margin: '0 0 0 10px',
+  card: {
+    padding: 0
+  },
+  cardHeader: {
+    margin: 5,
+    padding: 0,
+    textAlign: 'center'
+  },
+  cardBody: {
+    margin: 5,
+    padding: 0,
+    borderTop: '1px solid lightslategray',
+    borderBottom: '1px solid lightslategray',
   }
 }
 
@@ -52,10 +64,22 @@ const Comp = React.createClass({
             <CardMedia id={key}>
               <CompRender length={this.state.comp.length} width={this.state.comp.width} container={key}/>
             </CardMedia>
-            <Divider/>
-            <CardTitle title={comp.name} />
-            <CardText>
-              Measurement data goes here
+            <CardTitle title={comp.name} style={style.cardHeader}/>
+            <CardText style={style.cardBody}>
+              <Table>
+                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                  <TableRow>
+                    <TableHeaderColumn>Length</TableHeaderColumn>
+                    <TableHeaderColumn>Width</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody displayRowCheckbox={false}>
+                <TableRow >
+                    <TableRowColumn>{this.state.comp.length}</TableRowColumn>
+                    <TableRowColumn>{this.state.comp.width}</TableRowColumn>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </CardText>
             <CardActions>
               <RaisedButton label="Edit" onClick={() => this.editComponent(comp.id)}/>
