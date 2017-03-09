@@ -4,6 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router'
 import logo from '../assets/CircularSaw.svg'
+import thumbnail from '../assets/mathsaw.jpg'
 
 var style = {
   navstyle: {
@@ -66,6 +67,7 @@ const Landing = React.createClass({
               </Col>
               <Col sm={12} className="border">
                 <img src={logo} className="landingLogo" alt="Circular saw"/>
+                <img src={thumbnail} className="landingLogo" alt="Circular saw"/>
               </Col>
               <Col sm={12} className="border">
                 <h1>Saw</h1>
