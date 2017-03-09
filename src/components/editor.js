@@ -21,7 +21,6 @@ var style = {
     position: 'fixed',
     top: '0',
     boxShadow: 'none',
-    borderBottom: '3px solid #0365B5',
     boxShadow: '0 2px 10px 1px rgba(0,0,0,0.4)',
     opactiy: '0.8'
   },
@@ -36,9 +35,11 @@ var style = {
   },
   paper: {
     padding: 10,
-    backgroundColor: '#51514F',
+    backgroundColor: '#ffffff',
     margin: '20px 0 20px 0',
     boxShadow: '0 0 10px 3px rgba(0,0,0,0.1)',
+    borderRight: '3px solid dodgerblue',
+    borderLeft: '3px solid dodgerblue',
   },
   expButton: {
     position: 'fixed',
@@ -60,11 +61,13 @@ var style = {
 
   },
   projectName: {
+    width: 400,
     backgroundColor: '#353531',
     fontSize: 35,
     color: "#ffffff",
     border: '1px solid #2C2C29',
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: 25
   }
 }
 
@@ -180,6 +183,42 @@ var Editor = React.createClass({
     return (
       <main>
         <NavBar style={this.state.style} save={this.saveProject} />
+        <div className="newComponent">
+          <div className="formContainer">
+            <Row id="inputfields" className="center">
+              <Col sm={12} md={4}>
+                <input
+                placeholder="description"
+                type="text"
+                onChange={this.componentName}
+                value={this.state.name}
+                />
+              </Col>
+              <Col sm={12} md={4}>
+                <input
+                placeholder="Length"
+                type="text"
+                onChange={this.setLength}
+                value={this.state.length}
+                />
+              </Col>
+              <Col sm={12} md={4}>
+                <input
+                placeholder="Width"
+                type="text"
+                onChange={this.setWidth}
+                value={this.state.width}
+                />
+              </Col>
+              <Col sm={12}>
+                <RaisedButton
+                label="Add Component"
+                onClick={this.addComponent}
+                />
+              </Col>
+            </Row>
+          </div>
+        </div>
         <Container className="container" id="mainContainer">
           <div>
             <Dialog
@@ -283,36 +322,6 @@ var Editor = React.createClass({
           <div className="center">
             <input type='text' value={this.state.projectName} onChange={this.projectName} style={this.state.style.projectName}/>
           </div>
-          <Paper style={style.paper}>
-            <Row id="inputfields" className="center">
-              <Col sm={12}>
-                <input
-                placeholder="Name"
-                type="text"
-                onChange={this.componentName}
-                value={this.state.name}
-                />
-                <input
-                placeholder="Length"
-                type="text"
-                onChange={this.setLength}
-                value={this.state.length}
-                />
-                <input
-                placeholder="Width"
-                type="text"
-                onChange={this.setWidth}
-                value={this.state.width}
-                />
-              </Col>
-              <Col sm={12}>
-                <RaisedButton
-                  label="Add Component"
-                  onClick={this.addComponent}
-                />
-              </Col>
-            </Row>
-          </Paper>
 
           {render}
 
