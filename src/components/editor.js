@@ -16,16 +16,19 @@ import Comp from './component'
 
 var style = {
   navstyle: {
-    backgroundColor: "#6200B3",
+    backgroundColor: "dodgerblue",
     color: "#114B5F",
     position: 'fixed',
     top: '0',
     boxShadow: 'none',
+    borderBottom: '3px solid #0365B5',
+    boxShadow: '0 2px 10px 1px rgba(0,0,0,0.4)',
+    opactiy: '0.8'
   },
   titlestyle: {
     color: 'white',
-    fontFamily: 'VT323, monospace',
-    fontSize: 50
+    fontFamily: 'Rubik Mono One',
+    fontSize: 30
   },
   logo: {
     height: 500,
@@ -55,6 +58,13 @@ var style = {
       backgroundColor: '#353531',
     }
 
+  },
+  projectName: {
+    backgroundColor: '#353531',
+    fontSize: 35,
+    color: "#ffffff",
+    border: '1px solid #2C2C29',
+    textAlign: 'center'
   }
 }
 
@@ -169,7 +179,7 @@ var Editor = React.createClass({
 
     return (
       <main>
-        <NavBar style={this.state.style} save={this.saveProject}/>
+        <NavBar style={this.state.style} save={this.saveProject} />
         <Container className="container" id="mainContainer">
           <div>
             <Dialog
@@ -271,7 +281,7 @@ var Editor = React.createClass({
             </Dialog>
           </div>
           <div className="center">
-            <h1>{this.state.projectName}</h1>
+            <input type='text' value={this.state.projectName} onChange={this.projectName} style={this.state.style.projectName}/>
           </div>
           <Paper style={style.paper}>
             <Row id="inputfields" className="center">
@@ -381,7 +391,6 @@ var Editor = React.createClass({
   },
 
   projectName(event) {
-
     let newName = event.target.value;
     this.setState({
       projectName: newName

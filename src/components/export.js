@@ -64,7 +64,7 @@ const Export = React.createClass({
 
       components.forEach((comp) => {
         if(x > comp.x && x < comp.x + comp.width*scale && y > comp.y && y < comp.y + comp.length*scale){
-          canvas.fillStyle = 'blue'
+          canvas.fillStyle = 'dodgerblue'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
           canvas.stroke();
 
