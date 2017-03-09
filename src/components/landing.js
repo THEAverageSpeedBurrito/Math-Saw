@@ -31,10 +31,14 @@ var style = {
     width: 100,
     position: 'absolute',
     backgroundColor: '#0365B5',
-    paddingTop: 15
+    paddingTop: 30
   },
   code: {
     width: 225
+  },
+  button: {
+    marginLeft: 15,
+    borderBottom: '3px solid #3DE292'
   }
 }
 
@@ -77,7 +81,7 @@ const Landing = React.createClass({
         </div>
         <div style={this.state.style.lower} className="center">
           <input type="text" style={style.code} value={this.state.projectCode} onChange={this.getProjectCode}/>
-          <Link to='/editor'><RaisedButton label="Load" onClick={this.loadProject}/></Link>
+          <Link to='/editor'><RaisedButton label="Load" onClick={this.loadProject} style={style.button}/></Link>
         </div>
       </div>
     )

@@ -73,7 +73,7 @@ const Export = React.createClass({
           name.textContent = comp.name
           area.textContent = comp.area + 'in^2'
         }else{
-          canvas.fillStyle = '#3DE292'
+          canvas.fillStyle = '#BEBEBE'
           canvas.fillRect(comp.x, comp.y, comp.width*scale, comp.length*scale)
           canvas.stroke();
         }
@@ -108,7 +108,7 @@ const Export = React.createClass({
         <Row>
           <Col sm={12} md={3}>
             <List>
-              <ListItem primaryText={this.state.stats.compCount} secondaryText="Total Components" />
+              <ListItem primaryText={this.state.stats.compCount} secondaryText="Total Components" style={{color: 'white !important'}}/>
               <ListItem primaryText={this.state.stats.areaUsed} secondaryText="Component Area"/>
               <ListItem primaryText={this.state.stats.stockCount} secondaryText="Boards Used" />
               <ListItem primaryText={this.state.stats.stockArea} secondaryText="Stock Area" />

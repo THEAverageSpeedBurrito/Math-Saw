@@ -17,6 +17,8 @@ function createCanvas (stock, components, root, canvasInherit, scaleInherit, cut
     usedStock.push(new Stock(96, 4));
     usableStock.push(usedStock[0]);
   }
+
+  canvas.strokeStyle = "white"
   canvas.rect(origin.x, origin.y, usedStock[0].width * scale, usedStock[0].length * scale)
 
   //sort components largest area first
@@ -62,9 +64,9 @@ function calculatePlacement(stock, comp, cutWidth) {
   comp.x = origin.x;
   comp.y = origin.y;
 
-  canvas.strokeStyle= 'dodgerblue'
+  canvas.fillStyle = "#BEBEBE"
+  canvas.fillRect(origin.x, origin.y, comp.width * scale, comp.length * scale);
   canvas.rect(origin.x, origin.y, comp.width * scale, comp.length * scale);
-  canvas.stroke();
 
   if(!stock.fitsExactly(comp)){
     var difLength = stock.length - comp.length;

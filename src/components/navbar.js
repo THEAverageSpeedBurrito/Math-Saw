@@ -16,7 +16,7 @@ const NavBar = React.createClass({
 
     return (
       <AppBar
-        title="Math Saw"
+        title="MATH SAW"
         style={this.props.style.navstyle}
         titleStyle={this.props.style.titlestyle}
         showMenuIconButton={false}
