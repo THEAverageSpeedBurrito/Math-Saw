@@ -107,11 +107,7 @@ const Landing = React.createClass({
   },
 
   loadProject() {
-    if(this.state.projectCode.length === 20){
-      sessionStorage.setItem('projectCode', this.state.projectCode);
-    }else{
-      alert('invalid code');
-    }
+    sessionStorage.setItem('projectCode', this.state.projectCode);
   }
 });
 

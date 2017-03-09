@@ -32,7 +32,8 @@ var style = {
     margin: '10px 0 10px 0'
   },
   card: {
-    padding: 0
+    padding: 0,
+    margin: 10
   },
   cardHeader: {
     margin: 5,
