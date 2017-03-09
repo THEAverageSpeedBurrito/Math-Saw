@@ -367,7 +367,7 @@ var Editor = React.createClass({
         name: '',
       });
     }else{
-      alert('invalid input')
+      alert('Input valid dimensions');
     }
 
   },

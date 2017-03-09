@@ -32,6 +32,9 @@ function createCanvas (stock, components, root, canvasInherit, scaleInherit, cut
 
     if(stock){
       calculatePlacement(stock, comp, cutWidth);
+    }else if(comp.length > 96 || comp.width > 4){
+      console.log('This component will not fit on standard stock', comp);
+      console.log('A planned feature of this app will be to take custom stock dimensions');
     }else{
       console.log("Cant seem to fit that anywhere, adding a new board");
       var stockOrigin = {
