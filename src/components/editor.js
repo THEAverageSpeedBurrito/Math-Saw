@@ -33,6 +33,7 @@ var style = {
   },
   paper: {
     padding: 10,
+    backgroundColor: '#51514F',
     margin: '20px 0 20px 0',
     boxShadow: '0 0 10px 3px rgba(0,0,0,0.1)',
   },
@@ -45,10 +46,12 @@ var style = {
   dialoge: {
     body: {
       borderLeft: '3px solid dodgerblue',
-      backgroundColor: '#51514F'
+      borderRight: '3px solid dodgerblue',
+      backgroundColor: '#51514F',
     },
     actions: {
       borderLeft: '3px solid dodgerblue',
+      borderRight: '3px solid dodgerblue',
       backgroundColor: '#353531',
     }
 

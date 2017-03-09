@@ -19,7 +19,7 @@ var style = {
     fontSize: 50
   },
   upper: {
-    backgroundColor: '#353531',
+    backgroundColor: '#838381',
     borderTop: '5px solid dodgerblue',
     borderBottom: '5px solid dodgerblue',
     color: 'white',
