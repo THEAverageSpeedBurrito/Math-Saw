@@ -125,3 +125,7 @@ input[type=text]:focus {
 .divider {
   background-color: #3DE292;
 }
+
+.label {
+  margin: 20px 0 -10px 0;
+}

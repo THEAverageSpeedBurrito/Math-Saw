@@ -247,6 +247,7 @@ var Editor = React.createClass({
                 <h3>Project information</h3>
               </Col>
               <Col sm={12} md={6}>
+                <p className="label">Project Name</p>
                 <input
                 type="text"
                 className="modal-input"
@@ -256,6 +257,7 @@ var Editor = React.createClass({
                 />
               </Col>
               <Col sm={12} md={6}>
+                <p className="label">Blade Width</p>
                 <input
                 type="text"
                 className="modal-input"
